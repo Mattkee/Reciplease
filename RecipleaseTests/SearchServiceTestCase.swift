@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Reciplease
 
 class SearchServiceTestCase: XCTestCase {
 
@@ -17,5 +18,19 @@ class SearchServiceTestCase: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    func testGivenInstanceOfRecipeService_WhenAccessingIt_ThenItExists() {
+        let recipeService = RecipeService()
+        
+        XCTAssertNotNil(recipeService)
+    }
+    func testGivenInstanceOfRecipeAPI_WhenAccessingIt_ThenItExists() {
+        let recipeAPI = RecipeAPI()
+        
+        XCTAssertNotNil(recipeAPI)
+    }
+    func testGivenBaseUrlOfRecipeAPI_WhenAccessingIt_ThenItExists() {
+        let recipeAPI = RecipeAPI()
+        
+        XCTAssertNotNil(recipeAPI.baseURL)
+    }
 }
