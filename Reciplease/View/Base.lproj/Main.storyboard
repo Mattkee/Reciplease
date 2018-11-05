@@ -20,57 +20,11 @@
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <outlet property="favoriteButton" destination="vf5-VO-Y0M" id="VcW-jU-y6D"/>
-                        <outlet property="mainTabBar" destination="yNX-cJ-cJF" id="e1s-i9-1Z9"/>
-                        <outlet property="newBar" destination="6qO-Ca-fky" id="YzE-TJ-4RC"/>
-                        <outlet property="searchButton" destination="mw4-Sl-pyB" id="ROj-43-Qz5"/>
-                        <segue destination="h92-rH-u7R" kind="relationship" relationship="viewControllers" id="H2O-7W-YjZ"/>
-                        <segue destination="My0-AU-pAu" kind="relationship" relationship="viewControllers" id="CMN-hb-1wf"/>
+                        <segue destination="h92-rH-u7R" kind="relationship" relationship="viewControllers" id="a3N-If-pNS"/>
+                        <segue destination="My0-AU-pAu" kind="relationship" relationship="viewControllers" id="Nps-DG-A9n"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1l-bZ-43y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="6qO-Ca-fky">
-                    <rect key="frame" x="0.0" y="0.0" width="370" height="84"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rLj-X7-iAE">
-                            <rect key="frame" x="0.0" y="4" width="370" height="80"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mw4-Sl-pyB">
-                                    <rect key="frame" x="0.0" y="0.0" width="185" height="80"/>
-                                    <color key="backgroundColor" red="0.21443605422973633" green="0.20081937313079834" blue="0.1959768533706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="20"/>
-                                    <state key="normal" title="Search">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="changeTabWithSender:" destination="4pQ-Ws-3Mh" eventType="touchUpInside" id="0qC-jT-iLv"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf5-VO-Y0M">
-                                    <rect key="frame" x="185" y="0.0" width="185" height="80"/>
-                                    <color key="backgroundColor" red="0.21443605422973633" green="0.20081937313079834" blue="0.1959768533706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="20"/>
-                                    <state key="normal" title="Favorite">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="changeTabWithSender:" destination="4pQ-Ws-3Mh" eventType="touchUpInside" id="PCH-D1-H5F"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="80" id="n83-P4-1CK"/>
-                            </constraints>
-                        </stackView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="rLj-X7-iAE" firstAttribute="leading" secondItem="Nog-9Y-2At" secondAttribute="leading" id="6Y1-Pa-IpG"/>
-                        <constraint firstItem="Nog-9Y-2At" firstAttribute="trailing" secondItem="rLj-X7-iAE" secondAttribute="trailing" id="Rts-YF-GDi"/>
-                        <constraint firstItem="Nog-9Y-2At" firstAttribute="bottom" secondItem="rLj-X7-iAE" secondAttribute="bottom" id="bIC-zr-WQm"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="Nog-9Y-2At"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="-1689" y="9"/>
         </scene>
@@ -269,11 +223,11 @@
             </objects>
             <point key="canvasLocation" x="1732" y="-376"/>
         </scene>
-        <!--Search-->
+        <!--Navigation Controller-->
         <scene sceneID="UNA-Gu-7hT">
             <objects>
                 <navigationController id="h92-rH-u7R" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="A6o-nK-2X6"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="A6o-nK-2X6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="yfr-qz-24V">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -543,11 +497,11 @@
             </objects>
             <point key="canvasLocation" x="97" y="444"/>
         </scene>
-        <!--Favorite-->
+        <!--Navigation Controller-->
         <scene sceneID="s7U-3S-NaT">
             <objects>
                 <navigationController id="My0-AU-pAu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorite" id="Kce-mh-wdf"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Kce-mh-wdf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="GFl-VL-OuU">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
