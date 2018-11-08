@@ -11,26 +11,32 @@ import XCTest
 
 class SearchServiceTestCase: XCTestCase {
 
+    var recipeService : RecipeService!
+    var recipeAPI : RecipeAPI!
+
     override func setUp() {
+        super.setUp()
+        recipeService = RecipeService()
+        recipeAPI = RecipeAPI()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
     func testGivenInstanceOfRecipeService_WhenAccessingIt_ThenItExists() {
-        let recipeService = RecipeService()
         
         XCTAssertNotNil(recipeService)
     }
-    func testGivenInstanceOfRecipeAPI_WhenAccessingIt_ThenItExists() {
-        let recipeAPI = RecipeAPI()
-        
-        XCTAssertNotNil(recipeAPI)
-    }
     func testGivenBaseUrlOfRecipeAPI_WhenAccessingIt_ThenItExists() {
-        let recipeAPI = RecipeAPI()
         
         XCTAssertNotNil(recipeAPI.baseURL)
     }
+    func testGivenPathUrlOfRecipeAPI_WhenAccessingIt_ThenItExists() {
+        XCTAssertNotNil(recipeAPI.path)
+    }
+    func testGivenHttpMethodOfRecipeAPI_WhenAccessingIt_ThenItExists() {
+        XCTAssertNotNil(recipeAPI.httpMethod)
+    }
+    func testGivenParametersOfRecipeAPI_WhenAccessingIt_ThenItExists() {
+        XCTAssertNotNil(recipeAPI.parameters)
+    }
+    
 }
