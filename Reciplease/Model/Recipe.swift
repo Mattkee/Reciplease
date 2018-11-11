@@ -12,13 +12,12 @@ struct Recipe: Decodable {
     let matches : [Matches]
     
     struct Matches: Decodable {
-        let imageUrlsBySize : ImageUrlsBySize
+        
         let ingredients : [String]
+        let smallImageUrls : [String]
         let recipeName : String
         let totalTimeInSeconds : Int
         let rating : Int
-    }
-    struct ImageUrlsBySize: Decodable {
-        let UrlImage : String
+
     }
 }

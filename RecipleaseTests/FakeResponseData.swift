@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class FakeResponseData {
     static let responseOK = HTTPURLResponse(
@@ -20,10 +21,10 @@ class FakeResponseData {
     class RecipeError: Error {}
     static let error = RecipeError()
     
-    static var changeCorrectData: Data? {
+    static var recipeCorrectData: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
         let url = bundle.url(forResource: "Recipe", withExtension: "json")!
         return try! Data(contentsOf: url)
     }
-    static let changeIncorrectData = "erreur".data(using: .utf8)!
+    static let recipeIncorrectData = "erreur".data(using: .utf8)!
 }

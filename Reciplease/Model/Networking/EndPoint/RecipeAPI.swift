@@ -25,6 +25,6 @@ struct RecipeAPI: EndPointType {
     
     var task: HTTPTask {
         let q = bodyText
-        return .requestParameters(bodyParameters: nil, urlParameters: ["_app_id": Constant._app_id, "_app_key": Constant._app_key, "q":q])
+        return .requestParameters(bodyParameters: nil, urlParameters: ["_app_id": Constant.yummlyAPIID, "_app_key": Constant.yummlyAPIKey, "q":q])
     }
 }

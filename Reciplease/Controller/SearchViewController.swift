@@ -26,6 +26,13 @@ class SearchViewController: UIViewController {
         }
         ingredient.append(text)
         ingredientTableView.reloadData()
+        let recipeService = RecipeService()
+        recipeService.getRecipe { (error, recipe) in
+            if error != nil {
+                print(error!)
+            }
+            print("ok")
+        }
     }
     
     @IBAction func clearButton(_ sender: UIButton) {
@@ -33,6 +40,7 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func searchButton(_ sender: UIButton) {
+        
     }
     
     @IBOutlet weak var ingredientTableView: UITableView!
