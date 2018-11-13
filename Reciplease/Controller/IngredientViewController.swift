@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  IngredientViewController.swift
 //  Reciplease
 //
 //  Created by Lei et Matthieu on 24/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class IngredientViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class SearchViewController: UIViewController {
     */
 
 }
-extension SearchViewController: UITableViewDataSource {
+extension IngredientViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

@@ -45,9 +45,12 @@ class Router<EndPoint: EndPointType, Object: Decodable>: NetworkRouter {
 
     // MARK: - Building the URL Request.
     fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {
-
-        var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
-
+        var request: URLRequest
+        if route.path == "" {
+            request = URLRequest(url: route.baseURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        } else {
+            request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        }
         request.httpMethod = route.httpMethod.rawValue
         do {
             switch route.task {
@@ -105,8 +108,12 @@ class Router<EndPoint: EndPointType, Object: Decodable>: NetworkRouter {
             return
         }
         guard let object = try? JSONDecoder().decode(object.self, from: responseData) else {
-            print(NetworkResponse.unableToDecode.rawValue)
-            completion(CustomerDisplayError.update.rawValue, nil)
+            guard let object = data as? Object else {
+                print(NetworkResponse.unableToDecode.rawValue)
+                completion(CustomerDisplayError.update.rawValue, nil)
+                return
+            }
+            completion(nil, object)
             return
         }
         completion(nil, object)

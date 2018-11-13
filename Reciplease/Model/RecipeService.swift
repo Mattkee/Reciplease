@@ -9,34 +9,26 @@
 import Foundation
 import Alamofire
 
+protocol DisplayAlert {
+    func showAlert(title: String, message: String)
+}
+
 class RecipeService {
     private var recipeAPI = RecipeAPI()
     private var router : Router<RecipeAPI, Recipe>
+    private var imageRouter : Router<RecipeImageAPI, Data>
     
-    init(router: Router<RecipeAPI, Recipe> = Router<RecipeAPI, Recipe>(alamofireRequest: AlamofireRequest())) {
+    init(router: Router<RecipeAPI, Recipe> = Router<RecipeAPI, Recipe>(alamofireRequest: AlamofireRequest()), imageRouter: Router<RecipeImageAPI, Data> = Router<RecipeImageAPI, Data>(alamofireRequest: AlamofireRequest())) {
         self.router = router
-    }
-    var ingredients = ["onion", "soup"]
-
-    func prepareIngredients(_ allIngredients: [String]) -> String {
-        var bodyText = ""
-        for ingredient in allIngredients {
-            if ingredient == allIngredients[0] {
-                bodyText = ingredient
-            } else {
-                bodyText = bodyText + "+" + ingredient
-            }
-        }
-        return bodyText
+        self.imageRouter = imageRouter
     }
 }
 
 // MARK: - Network Call
 extension RecipeService {
     func getRecipe(callback: @escaping (String?, Recipe?) -> Void) {
-        recipeAPI.bodyText = prepareIngredients(ingredients)
+        recipeAPI.bodyText = Constant.ingredients.joined(separator: "+")
         router.request(recipeAPI, Recipe.self) { (error, object) in
-            DispatchQueue.main.async {
                 guard error == nil else {
                     callback(error, nil)
                     return
@@ -44,10 +36,26 @@ extension RecipeService {
                 print("c'est ok")
                 let recipe = object as? Recipe
                 callback(nil, recipe)
-            }
         }
     }
-    func getRecipeImage(callback: @escaping (String?, [Data]) -> Void) {
-        
+    func getRecipeImage(newURL: String, callback: @escaping (String?, RecipeImage?) -> Void) {
+        guard let url = URL(string: newURL) else {
+            callback(nil, nil)
+            return
+        }
+        let recipeImageAPI = RecipeImageAPI(newUrl: url, httpMethod: .get)
+        imageRouter.request(recipeImageAPI, Data.self) { (error, object) in
+            guard error == nil else {
+                callback(error, nil)
+                return
+            }
+            print("image ok")
+            guard let image = object as? Data else {
+                callback(error, nil)
+                return
+            }
+            let recipeImage = RecipeImage(image: image)
+            callback(nil, recipeImage)
+        }
     }
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 struct RecipeImage {
-    
+    let image: Data
 }
