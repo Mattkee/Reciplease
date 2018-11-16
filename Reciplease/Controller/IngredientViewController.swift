@@ -16,7 +16,6 @@ class IngredientViewController: UIViewController {
         ingredientTableView.reloadData()
         // Do any additional setup after loading the view.
     }
-    var ingredient = [String]()
     
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -24,15 +23,9 @@ class IngredientViewController: UIViewController {
         guard let text = searchTextField.text else {
             return
         }
-        ingredient.append(text)
+        Constant.ingredients.append(text)
         ingredientTableView.reloadData()
-        let recipeService = RecipeService()
-        recipeService.getRecipe { (error, recipe) in
-            if error != nil {
-                print(error!)
-            }
-            print("ok")
-        }
+        self.searchTextField.text?.removeAll()
     }
     
     @IBAction func clearButton(_ sender: UIButton) {
@@ -40,13 +33,13 @@ class IngredientViewController: UIViewController {
     }
     
     @IBAction func searchButton(_ sender: UIButton) {
-        
+       
     }
     
     @IBOutlet weak var ingredientTableView: UITableView!
     
     func clear() {
-        ingredient = [String]()
+        Constant.ingredients = [String]()
         ingredientTableView.reloadData()
     }
     /*
@@ -65,13 +58,13 @@ extension IngredientViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ingredient.count
+        return Constant.ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredient", for: indexPath)
         
-        let nameIngredient = "- \(ingredient[indexPath.row])"
+        let nameIngredient = "- \(Constant.ingredients[indexPath.row])"
         cell.textLabel?.text = nameIngredient
         
         return cell

@@ -23,5 +23,5 @@ struct Constant {
     static let yummlyAPIID = "11c8630f"
     static let yummlyAPIKey = "fc109c0cebd13ea423026392a404ea49"
 
-    static var ingredients = ["onion", "soup"]
+    static var ingredients = [String]()
 }

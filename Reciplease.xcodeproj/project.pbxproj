@@ -11,6 +11,7 @@
 		AF242D6C2197A5BF00564FEF /* RecipeWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF242D6B2197A5BF00564FEF /* RecipeWithImage.swift */; };
 		AF242D6E2197A8CA00564FEF /* RecipeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF242D6D2197A8CA00564FEF /* RecipeImage.swift */; };
 		AF242D702197A9ED00564FEF /* RecipeImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF242D6F2197A9ED00564FEF /* RecipeImageAPI.swift */; };
+		AF449AFF219DB5480073B7F7 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */; };
 		AF4B47A921962A4B0031FFCE /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B47A321962A4A0031FFCE /* HTTPTask.swift */; };
 		AF4B47AA21962A4B0031FFCE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B47A421962A4A0031FFCE /* Router.swift */; };
 		AF4B47AB21962A4B0031FFCE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B47A521962A4A0031FFCE /* NetworkManager.swift */; };
@@ -58,6 +59,7 @@
 		AF242D6B2197A5BF00564FEF /* RecipeWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeWithImage.swift; sourceTree = "<group>"; };
 		AF242D6D2197A8CA00564FEF /* RecipeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImage.swift; sourceTree = "<group>"; };
 		AF242D6F2197A9ED00564FEF /* RecipeImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageAPI.swift; sourceTree = "<group>"; };
+		AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		AF4B47A321962A4A0031FFCE /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		AF4B47A421962A4A0031FFCE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		AF4B47A521962A4A0031FFCE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				AFBF6AB42180B80B00C424E8 /* IngredientViewController.swift */,
 				AFFAD3DA219AEC2C00876788 /* RecipeListTableViewController.swift */,
+				AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				AFBF6AB52180B80B00C424E8 /* IngredientViewController.swift in Sources */,
 				AF6DBBCA216B4C4500E9023F /* AppDelegate.swift in Sources */,
 				AFD1CC5C2194CD30002526D5 /* RequestProtocol.swift in Sources */,
+				AF449AFF219DB5480073B7F7 /* RecipeViewController.swift in Sources */,
 				AF4B47BC21962B210031FFCE /* JSONParameterEncoder.swift in Sources */,
 				AF242D6E2197A8CA00564FEF /* RecipeImage.swift in Sources */,
 				AF242D6C2197A5BF00564FEF /* RecipeWithImage.swift in Sources */,

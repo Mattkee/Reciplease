@@ -38,24 +38,24 @@ extension RecipeService {
                 callback(nil, recipe)
         }
     }
-    func getRecipeImage(newURL: String, callback: @escaping (String?, RecipeImage?) -> Void) {
-        guard let url = URL(string: newURL) else {
-            callback(nil, nil)
-            return
-        }
-        let recipeImageAPI = RecipeImageAPI(newUrl: url, httpMethod: .get)
-        imageRouter.request(recipeImageAPI, Data.self) { (error, object) in
-            guard error == nil else {
-                callback(error, nil)
-                return
-            }
-            print("image ok")
-            guard let image = object as? Data else {
-                callback(error, nil)
-                return
-            }
-            let recipeImage = RecipeImage(image: image)
-            callback(nil, recipeImage)
-        }
-    }
+//    func getRecipeImage(newURL: String, callback: @escaping (String?, RecipeImage?) -> Void) {
+//        guard let url = URL(string: newURL) else {
+//            callback(nil, nil)
+//            return
+//        }
+//        let recipeImageAPI = RecipeImageAPI(newUrl: url, httpMethod: .get)
+//        imageRouter.request(recipeImageAPI, Data.self) { (error, object) in
+//            guard error == nil else {
+//                callback(error, nil)
+//                return
+//            }
+//            print("image ok")
+//            guard let image = object as? Data else {
+//                callback(error, nil)
+//                return
+//            }
+//            let recipeImage = RecipeImage(image: image)
+//            callback(nil, recipeImage)
+//        }
+//    }
 }

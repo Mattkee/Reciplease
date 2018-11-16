@@ -12,6 +12,8 @@ class RecipeListTableViewController: UITableViewController {
 
     let recipeService = RecipeService()
     var recipe: Recipe?
+    var recipeWithImage = [RecipeWithImage]()
+    var myIndex = 0
 
     var displayAlertDelegate: DisplayAlert?
 
@@ -41,6 +43,33 @@ class RecipeListTableViewController: UITableViewController {
             self.recipeListTableView.reloadData()
         }
     }
+    
+    private func recipeImage(_ url: String) -> UIImage {
+        let finalUrl = String(url.dropLast(2) + "300")
+        
+        guard let imageUrl = URL(string: finalUrl) else {
+            return UIImage(imageLiteralResourceName: "breakfast")
+        }
+        guard let imageData = try? Data(contentsOf: imageUrl) else {
+            return UIImage(imageLiteralResourceName: "breakfast")
+        }
+        
+        guard let image = UIImage(data: imageData) else {
+            return UIImage(imageLiteralResourceName: "breakfast")
+        }
+        return image
+    }
+
+    func timeFormatted(totalSeconds: Int) -> String {
+//        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        let hours: Int = totalSeconds / 3600
+        if hours == 0 {
+            return String(format: "%02dmin", minutes)
+        } else {
+            return String(format: "%01dh %02dmin", hours, minutes)
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,9 +93,10 @@ class RecipeListTableViewController: UITableViewController {
         guard let recipeTitle = recipe?.matches[indexPath.row].recipeName else {
             return UITableViewCell()
         }
-        guard let ingredientList = recipe?.matches[indexPath.row].ingredients.joined(separator: ", ") else {
+        guard let ingredientList = recipe?.matches[indexPath.row].ingredients else {
             return UITableViewCell()
         }
+        let ingredients = ingredientList.joined(separator: ", ")
         guard let ratingLabel = recipe?.matches[indexPath.row].rating else {
             return UITableViewCell()
         }
@@ -74,27 +104,23 @@ class RecipeListTableViewController: UITableViewController {
         guard let timeLabel = recipe?.matches[indexPath.row].totalTimeInSeconds else {
             return UITableViewCell()
         }
-        let time = String(timeLabel)
+        let time = timeFormatted(totalSeconds: timeLabel)
+//        let time = String(timeLabel)
         guard let url = recipe?.matches[indexPath.row].smallImageUrls[0] else {
             return UITableViewCell()
         }
-        let finalUrl = String(url.dropLast(2) + "300")
+        let image = recipeImage(url)
 
-        var image: UIImage?
-        recipeService.getRecipeImage(newURL: finalUrl) { (error, recipeImage) in
-            guard error == nil else {
-                return
-            }
-            guard let imageRecipe = recipeImage?.image else {
-                return
-            }
-            image = UIImage(data: imageRecipe)
-        }
-        cell.configure(recipeTitle: recipeTitle, ingredientList: ingredientList, ratingLabel: rating, timeLabel: time, recipeImage: image ?? #imageLiteral(resourceName: "breakfast"))
+        recipeWithImage.append(RecipeWithImage(recipeName: recipeTitle, recipeIngredients: ingredientList, recipeImage: image, recipeTime: time, recipeRating: rating))
+        cell.configure(recipeTitle: recipeTitle, ingredientList: ingredients, ratingLabel: rating, timeLabel: time, recipeImage: image)
 
         return cell
     }
-    
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myIndex = indexPath.row
+//        performSegue(withIdentifier: "recipe", sender: self)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -131,15 +157,30 @@ class RecipeListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier) {
+            case "recipe":
+                guard let recipeViewController = segue.destination as? RecipeViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                guard let selectedRecipeCell = sender as? SearchResultTableViewCell else {
+                    fatalError("error envoi")
+                }
+                
+                guard let indexPath = tableView.indexPath(for: selectedRecipeCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                recipeViewController.recipeWithImage = self.recipeWithImage[indexPath.row]
+            default :
+                print("error")
+        }
     }
-    */
 
 }
 

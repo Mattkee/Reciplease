@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 struct RecipeWithImage {
     var recipeName : String
     var recipeIngredients : [String]
-    var recipeImage : Data
-    var recipeTime : Int
-    var recipeRating : Int
+    var recipeImage : UIImage
+    var recipeTime : String
+    var recipeRating : String
 }
