@@ -11,8 +11,13 @@ import UIKit
 class RecipeViewController: UIViewController {
 
     var recipeWithImage: RecipeWithImage?
+    var favorite = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        if favorite {
+            favoriteButton.image = UIImage(imageLiteralResourceName: "star-yellow-small")
+        }
         // Do any additional setup after loading the view.
         recipeIngredient.text = ""
         if let recipeWithImage = recipeWithImage {
@@ -35,7 +40,23 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var recipeTime: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeIngredient: UITextView!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
     
+    @IBAction func addFavorite(_ sender: UIBarButtonItem) {
+        if sender.image == UIImage(imageLiteralResourceName: "star-yellow-small") {
+            sender.image = UIImage(imageLiteralResourceName: "star-white-small")
+            guard let recipeName = recipeWithImage?.recipeName else {
+                return
+            }
+            Constant.favorites.removeAll(where: { $0.recipeName == recipeName })
+        } else {
+            sender.image = UIImage(imageLiteralResourceName: "star-yellow-small")
+            guard let recipe = recipeWithImage else {
+                return
+            }
+            Constant.favorites.append(recipe)
+        }
+    }
     /*
     // MARK: - Navigation
 

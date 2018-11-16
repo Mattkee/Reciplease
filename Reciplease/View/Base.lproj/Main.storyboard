@@ -33,7 +33,7 @@
         <scene sceneID="Ehi-VW-2NF">
             <objects>
                 <navigationController id="sA5-7a-Gh6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="NuB-Kl-2Tc"/>
+                    <tabBarItem key="tabBarItem" tag="1" systemItem="favorites" id="NuB-Kl-2Tc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="GcE-rL-huN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -174,7 +174,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="Rfl-pz-Ssv"/>
-                    <navigationItem key="navigationItem" title="Reciplease" leftItemsSupplementBackButton="YES" id="6fK-lX-eZz">
+                    <navigationItem key="navigationItem" title="Reciplease" id="6fK-lX-eZz">
                         <barButtonItem key="backBarButtonItem" title="Back" id="RQh-bD-Wnm"/>
                     </navigationItem>
                     <connections>
@@ -281,10 +281,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n6r-XH-4q5"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Reciplease" id="TVW-AE-Ymx">
+                    <navigationItem key="navigationItem" title="Reciplease" leftItemsSupplementBackButton="YES" id="TVW-AE-Ymx">
                         <barButtonItem key="backBarButtonItem" title="Back" id="IeL-Mz-wMG"/>
+                        <barButtonItem key="rightBarButtonItem" image="star-white-small" style="done" id="R14-HG-iMG">
+                            <connections>
+                                <action selector="addFavorite:" destination="kE2-vb-sjn" id="doW-aR-1Rt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoriteButton" destination="R14-HG-iMG" id="cyV-pf-qWo"/>
                         <outlet property="recipeImage" destination="Ez7-Rl-Umc" id="hLx-ci-fCM"/>
                         <outlet property="recipeIngredient" destination="WXd-6A-2oS" id="CO3-Xf-TgH"/>
                         <outlet property="recipeName" destination="YG3-TJ-W7z" id="cJD-Rb-ORG"/>
@@ -480,7 +486,10 @@
             <point key="canvasLocation" x="913" y="-376"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="star-white-small" width="50" height="48"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7CQ-dz-UGy"/>
+        <segue reference="uu3-oR-YMw"/>
     </inferredMetricsTieBreakers>
 </document>
