@@ -5,7 +5,6 @@
 //  Created by Lei et Matthieu on 24/10/2018.
 //  Copyright © 2018 Mattkee. All rights reserved.
 //
-
 import UIKit
 
 class SearchResultTableViewCell: UITableViewCell {
@@ -27,11 +26,38 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     
-    func configure(recipeTitle: String, ingredientList: String, ratingLabel: String, timeLabel: String, recipeImage: UIImage) {
-        self.recipeTitle.text = recipeTitle
-        self.ingredientList.text = ingredientList
-        self.ratingLabel.text = ratingLabel
-        self.timeLabel.text = timeLabel
-        self.recipeImage.image = recipeImage
+    var searchRecipe : SearchRecipe.Matches! {
+        didSet {
+            self.recipeTitle.text = searchRecipe.recipeName
+            let ingredients = searchRecipe.ingredients.joined(separator: ", ")
+            self.ingredientList.text = ingredients
+            self.ratingLabel.text = String(searchRecipe.rating)
+            let time = timeFormatted(totalSeconds: searchRecipe.totalTimeInSeconds)
+            self.timeLabel.text = time
+            let image = UIImage.recipeImage(searchRecipe.smallImageUrls[0])
+            self.recipeImage.image = image
+        }
+    }
+    var recipe : Recipe! {
+        didSet {
+            self.recipeTitle.text = recipe.name
+            let ingredients = recipe.ingredientLines.joined(separator: ", ")
+            self.ingredientList.text = ingredients
+            self.ratingLabel.text = String(recipe.rating)
+            self.timeLabel.text = recipe.totalTime
+            let image = UIImage.recipeImage(recipe.images[0].hostedSmallUrl)
+            self.recipeImage.image = image
+        }
+    }
+
+    private  func timeFormatted(totalSeconds: Int) -> String {
+        //        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        let hours: Int = totalSeconds / 3600
+        if hours == 0 {
+            return String(format: "%02dmin", minutes)
+        } else {
+            return String(format: "%01dh %02dmin", hours, minutes)
+        }
     }
 }

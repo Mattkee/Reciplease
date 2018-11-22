@@ -11,9 +11,7 @@ import UIKit
 class RecipeListTableViewController: UITableViewController {
 
     let recipeService = RecipeService()
-    var recipe: Recipe?
-    var recipeWithImage = [RecipeWithImage]()
-    var myIndex = 0
+    var searchResult : SearchRecipe?
 
     var displayAlertDelegate: DisplayAlert?
 
@@ -22,9 +20,8 @@ class RecipeListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayAlertDelegate = self
-        if self.tabBarController?.selectedIndex == 0 {
-            searchRecipe()
-        }
+        
+        searchRecipe()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -33,13 +30,11 @@ class RecipeListTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if self.tabBarController?.selectedIndex == 1 {
-            recipeListTableView.reloadData()
-        }
+        recipeListTableView.reloadData()
     }
 
     private func searchRecipe() {
-        recipeService.getRecipe { (error, recipe) in
+        recipeService.getSearchRecipe { (error, recipes) in
             guard error == nil else {
                 guard let error = error else {
                     return
@@ -47,37 +42,13 @@ class RecipeListTableViewController: UITableViewController {
                 self.showAlert(title: Constant.titleAlert, message: error)
                 return
             }
-            self.recipe = recipe
+            self.searchResult = recipes
             self.recipeListTableView.reloadData()
         }
     }
     
-    private func recipeImage(_ url: String) -> UIImage {
-        let finalUrl = String(url.dropLast(2) + "300")
-        
-        guard let imageUrl = URL(string: finalUrl) else {
-            return UIImage(imageLiteralResourceName: "breakfast")
-        }
-        guard let imageData = try? Data(contentsOf: imageUrl) else {
-            return UIImage(imageLiteralResourceName: "breakfast")
-        }
-        
-        guard let image = UIImage(data: imageData) else {
-            return UIImage(imageLiteralResourceName: "breakfast")
-        }
-        return image
-    }
-
-    func timeFormatted(totalSeconds: Int) -> String {
-//        let seconds: Int = totalSeconds % 60
-        let minutes: Int = (totalSeconds / 60) % 60
-        let hours: Int = totalSeconds / 3600
-        if hours == 0 {
-            return String(format: "%02dmin", minutes)
-        } else {
-            return String(format: "%01dh %02dmin", hours, minutes)
-        }
-    }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,105 +58,21 @@ class RecipeListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if self.tabBarController?.selectedIndex == 0 {
-            guard let recipeList = recipe?.matches else {
+            guard let recipes = searchResult?.matches else {
                 return 0
             }
-            return recipeList.count
-        } else {
-            return Constant.favorites.count
-        }
+            return recipes.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipe", for: indexPath) as? SearchResultTableViewCell else {
             return UITableViewCell()
         }
-        if self.tabBarController?.selectedIndex == 0 {
-            guard let recipeTitle = recipe?.matches[indexPath.row].recipeName else {
-                return UITableViewCell()
-            }
-            guard let ingredientList = recipe?.matches[indexPath.row].ingredients else {
-                return UITableViewCell()
-            }
-            let ingredients = ingredientList.joined(separator: ", ")
-            guard let ratingLabel = recipe?.matches[indexPath.row].rating else {
-                return UITableViewCell()
-            }
-            let rating = String(ratingLabel)
-            guard let timeLabel = recipe?.matches[indexPath.row].totalTimeInSeconds else {
-                return UITableViewCell()
-            }
-            let time = timeFormatted(totalSeconds: timeLabel)
-            //        let time = String(timeLabel)
-            guard let url = recipe?.matches[indexPath.row].smallImageUrls[0] else {
-                return UITableViewCell()
-            }
-            let image = recipeImage(url)
-            
-            recipeWithImage.append(RecipeWithImage(recipeName: recipeTitle, recipeIngredients: ingredientList, recipeImage: image, recipeTime: time, recipeRating: rating))
-            cell.configure(recipeTitle: recipeTitle, ingredientList: ingredients, ratingLabel: rating, timeLabel: time, recipeImage: image)
-            
-            return cell
-        } else {
-            let recipeTitle = Constant.favorites[indexPath.row].recipeName
-            let ingredientList = Constant.favorites[indexPath.row].recipeIngredients
-            let ingredients = ingredientList.joined(separator: ", ")
-            let ratingLabel = Constant.favorites[indexPath.row].recipeRating
-            let timeLabel = Constant.favorites[indexPath.row].recipeTime
-            let image = Constant.favorites[indexPath.row].recipeImage
-            
-            recipeWithImage.append(RecipeWithImage(recipeName: recipeTitle, recipeIngredients: ingredientList, recipeImage: image, recipeTime: timeLabel, recipeRating: ratingLabel))
-            cell.configure(recipeTitle: recipeTitle, ingredientList: ingredients, ratingLabel: ratingLabel, timeLabel: timeLabel, recipeImage: image)
-            
-            return cell
-        }
+        cell.searchRecipe = searchResult?.matches[indexPath.row]
+        return cell
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        myIndex = indexPath.row
-//        performSegue(withIdentifier: "recipe", sender: self)
-    }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
+   
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -202,27 +89,20 @@ class RecipeListTableViewController: UITableViewController {
                 guard let indexPath = tableView.indexPath(for: selectedRecipeCell) else {
                     fatalError("The selected cell is not being displayed by the table")
                 }
-                if self.tabBarController?.selectedIndex == 0 {
-                    recipeViewController.recipeWithImage = self.recipeWithImage[indexPath.row]
-                } else {
-                    recipeViewController.favorite = true
-                    recipeViewController.recipeWithImage = self.recipeWithImage[indexPath.row]
-                }
+                    guard let id = searchResult?.matches[indexPath.row].id else {
+                        fatalError("no id")
+                    }
+                    recipeViewController.recipeID = id
+                    Constant.favorites.forEach { recipe in
+                        if recipe.id == id {
+                        recipeViewController.favorite = true
+                        }
+                    }
             
             default :
                 print("error")
         }
     }
 
-}
-
-// MARK: - Alert Management
-extension RecipeListTableViewController: DisplayAlert {
-    func showAlert(title: String, message: String) {
-        let alerteVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alerteVC.addAction(action)
-        present(alerteVC, animated: true, completion: nil)
-    }
 }
 

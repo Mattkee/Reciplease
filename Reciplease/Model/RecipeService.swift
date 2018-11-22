@@ -9,53 +9,41 @@
 import Foundation
 import Alamofire
 
-protocol DisplayAlert {
-    func showAlert(title: String, message: String)
-}
-
 class RecipeService {
+    private var searchRecipeAPI = SearchRecipeAPI()
     private var recipeAPI = RecipeAPI()
-    private var router : Router<RecipeAPI, Recipe>
-    private var imageRouter : Router<RecipeImageAPI, Data>
-    
-    init(router: Router<RecipeAPI, Recipe> = Router<RecipeAPI, Recipe>(alamofireRequest: AlamofireRequest()), imageRouter: Router<RecipeImageAPI, Data> = Router<RecipeImageAPI, Data>(alamofireRequest: AlamofireRequest())) {
+    private var router : Router<SearchRecipeAPI, SearchRecipe>
+    private var recipeRouter : Router<RecipeAPI, Recipe>
+
+    init(router: Router<SearchRecipeAPI, SearchRecipe> = Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: AlamofireRequest()), recipeRouter: Router<RecipeAPI, Recipe> = Router<RecipeAPI, Recipe>(alamofireRequest: AlamofireRequest())) {
         self.router = router
-        self.imageRouter = imageRouter
+        self.recipeRouter = recipeRouter
     }
 }
 
 // MARK: - Network Call
 extension RecipeService {
-    func getRecipe(callback: @escaping (String?, Recipe?) -> Void) {
-        recipeAPI.bodyText = Constant.ingredients.joined(separator: "+")
-        router.request(recipeAPI, Recipe.self) { (error, object) in
-                guard error == nil else {
-                    callback(error, nil)
-                    return
-                }
-                print("c'est ok")
-                let recipe = object as? Recipe
-                callback(nil, recipe)
+    func getSearchRecipe(callback: @escaping (String?, SearchRecipe?) -> Void) {
+        searchRecipeAPI.bodyText = Constant.ingredients.joined(separator: "+")
+        router.request(searchRecipeAPI, SearchRecipe.self) { (error, object) in
+            guard error == nil else {
+                callback(error, nil)
+                return
+            }
+            let searchRecipe = object as? SearchRecipe
+            callback(nil, searchRecipe)
         }
     }
-//    func getRecipeImage(newURL: String, callback: @escaping (String?, RecipeImage?) -> Void) {
-//        guard let url = URL(string: newURL) else {
-//            callback(nil, nil)
-//            return
-//        }
-//        let recipeImageAPI = RecipeImageAPI(newUrl: url, httpMethod: .get)
-//        imageRouter.request(recipeImageAPI, Data.self) { (error, object) in
-//            guard error == nil else {
-//                callback(error, nil)
-//                return
-//            }
-//            print("image ok")
-//            guard let image = object as? Data else {
-//                callback(error, nil)
-//                return
-//            }
-//            let recipeImage = RecipeImage(image: image)
-//            callback(nil, recipeImage)
-//        }
-//    }
+    
+    func getRecipe(_ recipeId: String, callback: @escaping (String?, Recipe?) -> Void) {
+        recipeAPI.recipeID = recipeId
+        recipeRouter.request(recipeAPI, Recipe.self) { (error, object) in
+            guard error == nil else {
+                callback(error, nil)
+                return
+            }
+            let recipe = object as? Recipe
+            callback(nil, recipe)
+        }
+    }
 }
