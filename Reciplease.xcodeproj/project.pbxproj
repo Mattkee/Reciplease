@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF242D6A2197947800564FEF /* AlamofireRequestFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF242D692197947800564FEF /* AlamofireRequestFake.swift */; };
+		AF41FA5F21B8403800120ECA /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF41FA5E21B8403800120ECA /* Parameter.swift */; };
 		AF449AFF219DB5480073B7F7 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */; };
 		AF4B47A921962A4B0031FFCE /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B47A321962A4A0031FFCE /* HTTPTask.swift */; };
 		AF4B47AA21962A4B0031FFCE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B47A421962A4A0031FFCE /* Router.swift */; };
@@ -31,6 +32,8 @@
 		AF8D183821A70983003B82B4 /* DisplayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D183721A70983003B82B4 /* DisplayAlert.swift */; };
 		AF8D183A21A70A2E003B82B4 /* UIViewControler + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D183921A70A2E003B82B4 /* UIViewControler + Extension.swift */; };
 		AF8D183D21A70BF8003B82B4 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D183C21A70BF8003B82B4 /* FavoriteTableViewController.swift */; };
+		AF91CDB121B082EF00E82A5C /* ParametersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91CDB021B082EF00E82A5C /* ParametersTableViewController.swift */; };
+		AF91CDB321B0956300E82A5C /* ParametersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91CDB221B0956300E82A5C /* ParametersTableViewCell.swift */; };
 		AFA247F621A322B600B29B09 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA247F521A322B600B29B09 /* UIImage + Extension.swift */; };
 		AFA247F821A3669E00B29B09 /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA247F721A3669E00B29B09 /* RecipeAPI.swift */; };
 		AFA247FA21A36E7E00B29B09 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA247F921A36E7E00B29B09 /* Recipe.swift */; };
@@ -58,6 +61,7 @@
 		190316DFDC2B50ECC50FB332 /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
 		AE27F32DED38BCF34F38BD3C /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF242D692197947800564FEF /* AlamofireRequestFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestFake.swift; sourceTree = "<group>"; };
+		AF41FA5E21B8403800120ECA /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		AF4B47A321962A4A0031FFCE /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		AF4B47A421962A4A0031FFCE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 		AF8D183721A70983003B82B4 /* DisplayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlert.swift; sourceTree = "<group>"; };
 		AF8D183921A70A2E003B82B4 /* UIViewControler + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControler + Extension.swift"; sourceTree = "<group>"; };
 		AF8D183C21A70BF8003B82B4 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
+		AF91CDB021B082EF00E82A5C /* ParametersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersTableViewController.swift; sourceTree = "<group>"; };
+		AF91CDB221B0956300E82A5C /* ParametersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersTableViewCell.swift; sourceTree = "<group>"; };
 		AFA247F521A322B600B29B09 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		AFA247F721A3669E00B29B09 /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 		AFA247F921A36E7E00B29B09 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 				AFFAD3DA219AEC2C00876788 /* RecipeListTableViewController.swift */,
 				AF8D183C21A70BF8003B82B4 /* FavoriteTableViewController.swift */,
 				AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */,
+				AF91CDB021B082EF00E82A5C /* ParametersTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 				AF6DBBCD216B4C4500E9023F /* Main.storyboard */,
 				AF6DBBD5216B4C4800E9023F /* LaunchScreen.storyboard */,
 				AFBF6AB8218111E700C424E8 /* SearchResultTableViewCell.swift */,
+				AF91CDB221B0956300E82A5C /* ParametersTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 				AF7B51D121918EDF0001FCC5 /* SearchRecipe.swift */,
 				AFA247F921A36E7E00B29B09 /* Recipe.swift */,
 				AF8D183721A70983003B82B4 /* DisplayAlert.swift */,
+				AF41FA5E21B8403800120ECA /* Parameter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -423,6 +432,7 @@
 				AF6DBBD2216B4C4500E9023F /* Reciplease.xcdatamodeld in Sources */,
 				AFBF6AB9218111E700C424E8 /* SearchResultTableViewCell.swift in Sources */,
 				AF8D183A21A70A2E003B82B4 /* UIViewControler + Extension.swift in Sources */,
+				AF91CDB321B0956300E82A5C /* ParametersTableViewCell.swift in Sources */,
 				AF4B47B021962A510031FFCE /* SearchRecipeAPI.swift in Sources */,
 				AF8D183821A70983003B82B4 /* DisplayAlert.swift in Sources */,
 				AF4B47AE21962A4B0031FFCE /* HTTPMethod.swift in Sources */,
@@ -435,11 +445,13 @@
 				AFD1CC622194E6D8002526D5 /* Constant.swift in Sources */,
 				AF8D183D21A70BF8003B82B4 /* FavoriteTableViewController.swift in Sources */,
 				AF4B47C021964AC60031FFCE /* AlamofireRequest.swift in Sources */,
+				AF91CDB121B082EF00E82A5C /* ParametersTableViewController.swift in Sources */,
 				AF7B51D221918EDF0001FCC5 /* SearchRecipe.swift in Sources */,
 				AF4B47B421962A590031FFCE /* ParameterEncoding.swift in Sources */,
 				AFA247FA21A36E7E00B29B09 /* Recipe.swift in Sources */,
 				AFA247F621A322B600B29B09 /* UIImage + Extension.swift in Sources */,
 				AF4B47AD21962A4B0031FFCE /* NetworkRouter.swift in Sources */,
+				AF41FA5F21B8403800120ECA /* Parameter.swift in Sources */,
 				AF4B47B521962A590031FFCE /* URLParameterEncoder.swift in Sources */,
 				AF4B47AC21962A4B0031FFCE /* EndPointType.swift in Sources */,
 				AFBF6AB52180B80B00C424E8 /* IngredientViewController.swift in Sources */,
