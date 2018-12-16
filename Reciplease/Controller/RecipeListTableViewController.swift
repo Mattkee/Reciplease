@@ -93,11 +93,6 @@ class RecipeListTableViewController: UITableViewController {
                         fatalError("no id")
                     }
                     recipeViewController.recipeID = id
-                    Constant.favorites.forEach { recipe in
-                        if recipe.id == id {
-                        recipeViewController.favorite = true
-                        }
-                    }
             
             default :
                 print("error")

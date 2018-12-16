@@ -11,10 +11,23 @@ import UIKit
 class RecipeViewController: UIViewController {
 
     var recipe: Recipe?
+    var favoriteRecipe: FavoriteRecipe?
 
     let recipeService = RecipeService()
     var recipeID : String?
-    var favorite = false
+    var favorite : Bool {
+        if recipeID != nil {
+            let favorite = FavoriteRecipe.all.contains(where: { $0.id == recipeID })
+            return favorite
+        } else if favoriteRecipe != nil {
+            let favorite = FavoriteRecipe.all.contains(where: { $0.id == favoriteRecipe?.id })
+            recipeID = favoriteRecipe?.id
+            return favorite
+        } else {
+            return false
+        }
+    }
+
     var preparation = [String]()
 
     var displayAlertDelegate: DisplayAlert?
@@ -23,13 +36,31 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
         if favorite {
             favoriteButton.image = UIImage(imageLiteralResourceName: "star-yellow-small")
+            let favorite = FavoriteRecipe.all.first(where: { $0.id == recipeID })
+            self.favoriteRecipe = favorite
+            displayFavorite()
+        } else {
+            guard let id = recipeID else {
+                return
+            }
+            searchRecipe(id)
         }
-        guard let id = recipeID else {
-            displayRecipe()
-            return
-        }
-        searchRecipe(id)
+        
         // Do any additional setup after loading the view
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        if favorite {
+            favoriteButton.image = UIImage(imageLiteralResourceName: "star-yellow-small")
+            let favorite = FavoriteRecipe.all.first(where: { $0.id == recipeID })
+            self.favoriteRecipe = favorite
+            displayFavorite()
+        } else {
+            guard let id = recipeID else {
+                return
+            }
+            searchRecipe(id)
+        }
     }
     
     @IBOutlet weak var recipeName: UILabel!
@@ -42,22 +73,26 @@ class RecipeViewController: UIViewController {
     @IBAction func addFavorite(_ sender: UIBarButtonItem) {
         if sender.image == UIImage(imageLiteralResourceName: "star-yellow-small") {
             sender.image = UIImage(imageLiteralResourceName: "star-white-small")
-            guard let recipeName = recipe?.name else {
+            guard let recipeID = favoriteRecipe?.id else {
+                print("ça marche pas")
                 return
             }
-            Constant.favorites.removeAll(where: { $0.name == recipeName })
-            Constant.favorites.forEach { recipe in
-                print(recipe.name)
-            }
+            print("ça marche")
+            FavoriteRecipe.remove(recipeID)
+//            Constant.favorites.removeAll(where: { $0.name == recipeName })
+//            Constant.favorites.forEach { recipe in
+//                print(recipe.name)
+//            }
         } else {
             sender.image = UIImage(imageLiteralResourceName: "star-yellow-small")
             guard let recipe = recipe else {
                 return
             }
-            Constant.favorites.append(recipe)
-            Constant.favorites.forEach { recipe in
-                print(recipe.name)
-            }
+            FavoriteRecipe.save(recipe.name, recipe.id, recipe.totalTime, String(recipe.rating), recipe.ingredientLines, recipe.images[0].hostedSmallUrl)
+//            Constant.favorites.append(recipe)
+//            Constant.favorites.forEach { recipe in
+//                print(recipe.name)
+//            }
         }
     }
     
@@ -75,7 +110,7 @@ class RecipeViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    func displayRecipe() {
+    func displayRecipe(){
         guard let name = recipe?.name else {
             return
         }
@@ -93,6 +128,36 @@ class RecipeViewController: UIViewController {
         }
         self.preparation = ingredientLine
         guard let image = recipe?.images[0].hostedSmallUrl else {
+            return
+        }
+        self.recipeImage.image = UIImage.recipeImage(image)
+    }
+    func displayFavorite() {
+        guard let name = favoriteRecipe?.name else {
+            print("1")
+            return
+        }
+        self.recipeName.text = name
+        guard let rating = favoriteRecipe?.rating else {
+            print("2")
+            return
+        }
+        self.recipeRating.text = rating
+        guard let time = favoriteRecipe?.totalTime else {
+            print("3")
+            return
+        }
+        self.recipeTime.text = time
+        let ingredients = Ingredient.all
+        ingredients.forEach { element in
+            if element.recipe == favoriteRecipe {
+                if let name = element.name {
+                    preparation.append(name)
+                }
+            }
+        }
+        guard let image = favoriteRecipe?.image else {
+            print("4")
             return
         }
         self.recipeImage.image = UIImage.recipeImage(image)

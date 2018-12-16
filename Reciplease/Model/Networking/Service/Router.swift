@@ -28,6 +28,7 @@ class Router<EndPoint: EndPointType, Object: Decodable>: NetworkRouter {
                 completion(CustomerDisplayError.update.rawValue, nil)
                 return
             }
+            print(url)
             alamofireRequest.request(url: url) { (data, response, error) in
                 guard error == nil else {
                     print("Please check your network connection.")

@@ -10,7 +10,7 @@ import UIKit
 
 class FavoriteTableViewController: UITableViewController {
 
-    var recipes = [Recipe]()
+    var favoriteRecipe = FavoriteRecipe.all
     
     var displayAlertDelegate: DisplayAlert?
     
@@ -19,7 +19,6 @@ class FavoriteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayAlertDelegate = self
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -28,7 +27,7 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.recipes = Constant.favorites
+        self.favoriteRecipe = FavoriteRecipe.all
         recipeListTableView.reloadData()
     }
     
@@ -41,14 +40,14 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return recipes.count
+        return favoriteRecipe.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteRecipe", for: indexPath) as? SearchResultTableViewCell else {
             return UITableViewCell()
         }
-        cell.recipe = recipes[indexPath.row]
+        cell.favoriteRecipe = favoriteRecipe[indexPath.row]
         return cell
     }
     
@@ -69,12 +68,7 @@ class FavoriteTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPath(for: selectedRecipeCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
-            recipeViewController.recipe = recipes[indexPath.row]
-            Constant.favorites.forEach { recipe in
-                if recipe.id == recipes[indexPath.row].id {
-                    recipeViewController.favorite = true
-                }
-            }
+            recipeViewController.favoriteRecipe = favoriteRecipe[indexPath.row]
             
         default :
             print("error")

@@ -26,6 +26,11 @@ struct Constant {
     static let cookingChoice = ["American", "Italian", "Asian", "Mexican", "Southern & Soul Food", "French", "Southwestern", "Barbecue", "Indian", "Chinese", "Cajun & Creole", "English", "Mediterranean", "Greek", "Spanish", "German", "Thai", "Moroccan", "Irish", "Japanese", "Cuban", "Hawaiin", "Swedish", "Hungarian", "Portugese"]
     static let diets = ["Lacto vegetarian", "Ovo vegetarian", "Pescetarian", "Vegan", "Vegetarian"]
     static let alergies = ["Dairy", "Egg", "Gluten", "Peanut", "Seafood", "Sesame", "Soy", "Sulfite", "Tree Nut", "Wheat"]
+    
+    static var cookingParameters = [String]()
+    static var dietsParameters = [String]()
+    static var alergiesParameters = [String]()
+
     static var ingredients = [String]()
 
     static var favorites = [Recipe]()

@@ -43,6 +43,8 @@
 		AFD1CC542194396E002526D5 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1CC532194396E002526D5 /* FakeResponseData.swift */; };
 		AFD1CC5621943A01002526D5 /* Recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = AFD1CC5521943A01002526D5 /* Recipe.json */; };
 		AFD1CC622194E6D8002526D5 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1CC612194E6D8002526D5 /* Constant.swift */; };
+		AFDE90C521C39F0300F53EB2 /* FavoriteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE90C421C39F0300F53EB2 /* FavoriteRecipe.swift */; };
+		AFDE90C721C3C5D600F53EB2 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE90C621C3C5D600F53EB2 /* Ingredient.swift */; };
 		AFFAD3DB219AEC2C00876788 /* RecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFAD3DA219AEC2C00876788 /* RecipeListTableViewController.swift */; };
 		FDC516F5548476CE6D516778 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE27F32DED38BCF34F38BD3C /* Pods_Reciplease.framework */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,8 @@
 		AFD1CC532194396E002526D5 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		AFD1CC5521943A01002526D5 /* Recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Recipe.json; sourceTree = "<group>"; };
 		AFD1CC612194E6D8002526D5 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		AFDE90C421C39F0300F53EB2 /* FavoriteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipe.swift; sourceTree = "<group>"; };
+		AFDE90C621C3C5D600F53EB2 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		AFFAD3DA219AEC2C00876788 /* RecipeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewController.swift; sourceTree = "<group>"; };
 		F48E3EE0BB0B05C4E46B1E13 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,6 +254,8 @@
 				AFA247F921A36E7E00B29B09 /* Recipe.swift */,
 				AF8D183721A70983003B82B4 /* DisplayAlert.swift */,
 				AF41FA5E21B8403800120ECA /* Parameter.swift */,
+				AFDE90C421C39F0300F53EB2 /* FavoriteRecipe.swift */,
+				AFDE90C621C3C5D600F53EB2 /* Ingredient.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,12 +442,14 @@
 				AF4B47B021962A510031FFCE /* SearchRecipeAPI.swift in Sources */,
 				AF8D183821A70983003B82B4 /* DisplayAlert.swift in Sources */,
 				AF4B47AE21962A4B0031FFCE /* HTTPMethod.swift in Sources */,
+				AFDE90C521C39F0300F53EB2 /* FavoriteRecipe.swift in Sources */,
 				AFFAD3DB219AEC2C00876788 /* RecipeListTableViewController.swift in Sources */,
 				AF4B47AA21962A4B0031FFCE /* Router.swift in Sources */,
 				AFA247F821A3669E00B29B09 /* RecipeAPI.swift in Sources */,
 				AFC1C5E62190789000905734 /* RecipeService.swift in Sources */,
 				AF4B47AB21962A4B0031FFCE /* NetworkManager.swift in Sources */,
 				AF4B47A921962A4B0031FFCE /* HTTPTask.swift in Sources */,
+				AFDE90C721C3C5D600F53EB2 /* Ingredient.swift in Sources */,
 				AFD1CC622194E6D8002526D5 /* Constant.swift in Sources */,
 				AF8D183D21A70BF8003B82B4 /* FavoriteTableViewController.swift in Sources */,
 				AF4B47C021964AC60031FFCE /* AlamofireRequest.swift in Sources */,

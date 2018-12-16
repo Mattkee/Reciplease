@@ -21,12 +21,7 @@ class IngredientViewController: UIViewController {
     @IBOutlet weak var recipeViewParameters: UIView!
     
     @IBAction func addButton(_ sender: UIButton) {
-        guard let text = searchTextField.text else {
-            return
-        }
-        Constant.ingredients.append(text)
-        ingredientTableView.reloadData()
-        self.searchTextField.text?.removeAll()
+        addText()
     }
     
     @IBAction func clearButton(_ sender: UIButton) {
@@ -51,6 +46,34 @@ class IngredientViewController: UIViewController {
         Constant.ingredients = [String]()
         ingredientTableView.reloadData()
     }
+    
+    func ingredienttext(_ text: String) -> [String] {
+        var list = text.components(separatedBy: ", ")
+        list.forEach { element in
+            if element.contains(",") {
+                let test = element.components(separatedBy: ",")
+                list.append(contentsOf: test)
+                list.removeAll(where: {$0 == element})
+            }
+        }
+        return list
+    }
+    func addText() {
+        guard let text = searchTextField.text else {
+            return
+        }
+        if text.contains(",") {
+            let finalTest = ingredienttext(text)
+            Constant.ingredients.append(contentsOf: finalTest)
+        } else {
+            Constant.ingredients.append(text)
+        }
+        ingredientTableView.reloadData()
+        self.searchTextField.text?.removeAll()
+    }
+    func removeIngredient(at index: Int) {
+        Constant.ingredients.remove(at: index)
+    }
 }
 
 extension IngredientViewController: UITableViewDataSource {
@@ -68,5 +91,26 @@ extension IngredientViewController: UITableViewDataSource {
         cell.textLabel?.text = nameIngredient
         
         return cell
+    }
+}
+
+extension IngredientViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            removeIngredient(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+}
+
+// MARK: - Keyboard
+extension IngredientViewController : UITextFieldDelegate {
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        searchTextField.resignFirstResponder()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        addText()
+        return true
     }
 }

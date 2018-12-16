@@ -19,12 +19,40 @@ class RecipeService {
         self.router = router
         self.recipeRouter = recipeRouter
     }
+    func addParameters() -> [(String, Any)] {
+        var parameters = [(String, Any)]()
+        let cookingParameters = Constant.cookingParameters
+        let dietsParameters = Constant.dietsParameters
+        let alergiesParameters = Constant.alergiesParameters
+        
+        if !cookingParameters.isEmpty {
+            cookingParameters.forEach { parameter in
+                parameters.append(("allowedCuisine[]", parameter))
+            }
+        }
+        if !dietsParameters.isEmpty {
+            dietsParameters.forEach { parameter in
+                parameters.append(("allowedDiet[]", parameter))
+            }
+        }
+        if !alergiesParameters.isEmpty {
+            alergiesParameters.forEach { parameter in
+                parameters.append(("allowedAllergy[]", parameter))
+            }
+        }
+        return parameters
+    }
 }
 
 // MARK: - Network Call
 extension RecipeService {
     func getSearchRecipe(callback: @escaping (String?, SearchRecipe?) -> Void) {
-        searchRecipeAPI.bodyText = Constant.ingredients.joined(separator: "+")
+        let q = Constant.ingredients.joined(separator: "+")
+        let parameters = addParameters()
+        searchRecipeAPI.parameters.append(("q", q))
+        if !parameters.isEmpty {
+            searchRecipeAPI.parameters.append(contentsOf: parameters)
+        }
         router.request(searchRecipeAPI, SearchRecipe.self) { (error, object) in
             guard error == nil else {
                 callback(error, nil)

@@ -320,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5U-U2-wBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2033" y="491"/>
+            <point key="canvasLocation" x="2110" y="491"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UNA-Gu-7hT">
@@ -552,7 +552,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="266.5" height="41"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Hel-if-j7z"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wl-lj-NFN">
                                                 <rect key="frame" x="281.5" y="0.0" width="63.5" height="41"/>
@@ -644,6 +647,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.21443605422973633" green="0.20081937313079834" blue="0.1959768533706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uY8-ki-wek" secondAttribute="bottom" constant="60" id="0lr-Pc-GUH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dfN-bL-FmY" secondAttribute="trailing" constant="20" id="1rM-6e-tw4"/>
@@ -660,6 +664,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j02-aH-YQE" secondAttribute="trailing" constant="20" id="zhP-qy-D3C"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="RJU-d9-mWA" appends="YES" id="5Lf-qK-uwi"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="uG9-wK-KkN">
                         <barButtonItem key="backBarButtonItem" title="Back" id="aTu-Wm-vBr"/>
@@ -675,6 +682,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="RJU-d9-mWA">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="IOO-1Z-TTA"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="912.79999999999995" y="-376.46176911544228"/>
         </scene>

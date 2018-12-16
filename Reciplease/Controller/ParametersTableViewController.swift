@@ -17,11 +17,6 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
     var allergies = [ListElement]()
 
     var twoDimensionalArray = [Parameter]()
-//    let headerSectionLabel : [String] = ["Cooking Choice", "Diets", "Allergies"]
-//    let cuisineList = ["American", "Italian", "Asian", "Mexican", "Southern & Soul Food", "French", "Southwestern", "Barbecue", "Indian", "Chinese", "Cajun & Creole", "English", "Mediterranean", "Greek", "Spanish", "German", "Thai", "Moroccan", "Irish", "Japanese", "Cuban", "Hawaiin", "Swedish", "Hungarian", "Portugese"]
-//    let diet = ["Lacto vegetarian", "Ovo vegetarian", "Pescetarian", "Vegan", "Vegetarian"]
-//    let allergies = ["Dairy", "Egg", "Gluten", "Peanut", "Seafood", "Sesame", "Soy", "Sulfite", "Tree Nut", "Wheat"]
-//    var sectionData : [Int: [String]] = [:]
 
     @IBOutlet var parametersPopup: UITableView!
     
@@ -51,13 +46,6 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
             Parameter(isExpanded: true, title: "Diets", list: diets),
             Parameter(isExpanded: true, title: "Allergies", list: allergies)
         ]
-//        sectionData = [0: cuisineList, 1: diet, 2: allergies]
-//        parametersPopup.register(ParametersTableViewCell.self, forCellReuseIdentifier: "parameters")
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -90,7 +78,6 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
         let checkmark = UITableViewCell.AccessoryType.checkmark
         if twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected == true {
             cell.accessoryType = checkmark
-            cell.isSelected = true
         } else {
             cell.accessoryType = UITableViewCell.AccessoryType.none
         }
@@ -98,11 +85,14 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         if twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected == false {
             twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = true
+            addParameters(indexPath.section, twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+            tableView.reloadData()
         } else {
             twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = false
+            removeParameters(indexPath.section, twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+            tableView.reloadData()
         }
     }
 
@@ -117,12 +107,34 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
         }
         callback(listElement)
     }
-//    func addParameters(_ section: Int, _ value: Int) {
-//        if section == 0 {
-//            Constant.cuisineList.append(cuisineList[value])
-//            print(cuisineList[value])
-//        }
-//    }
+    func addParameters(_ section: Int, _ element: String) {
+        if section == 0 {
+            Constant.cookingParameters.append(element)
+        } else if section == 1 {
+            Constant.dietsParameters.append(element)
+        } else {
+            Constant.alergiesParameters.append(element)
+        }
+    }
+
+    func removeParameters(_ section: Int, _ element: String) {
+        if section == 0 {
+            guard let index = Constant.cookingParameters.firstIndex(of: element) else {
+                return
+            }
+            Constant.cookingParameters.remove(at: index)
+        } else if section == 1 {
+            guard let index = Constant.dietsParameters.firstIndex(of: element) else {
+                return
+            }
+            Constant.dietsParameters.remove(at: index)
+        } else {
+            guard let index = Constant.alergiesParameters.firstIndex(of: element) else {
+                return
+            }
+            Constant.alergiesParameters.remove(at: index)
+        }
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
