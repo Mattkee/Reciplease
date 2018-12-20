@@ -18,7 +18,7 @@ class IngredientViewController: UIViewController {
     }
     
     @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var recipeViewParameters: UIView!
+//    @IBOutlet weak var recipeViewParameters: UIView!
     
     @IBAction func addButton(_ sender: UIButton) {
         addText()
@@ -32,13 +32,13 @@ class IngredientViewController: UIViewController {
        
     }
     
-    @IBAction func recipeParameters(_ sender: UIBarButtonItem) {
-        if recipeViewParameters.isHidden == true {
-            recipeViewParameters.isHidden = false
-        } else {
-            recipeViewParameters.isHidden = true
-        }
-    }
+//    @IBAction func recipeParameters(_ sender: UIBarButtonItem) {
+//        if recipeViewParameters.isHidden == true {
+//            recipeViewParameters.isHidden = false
+//        } else {
+//            recipeViewParameters.isHidden = true
+//        }
+//    }
 
     @IBOutlet weak var ingredientTableView: UITableView!
     

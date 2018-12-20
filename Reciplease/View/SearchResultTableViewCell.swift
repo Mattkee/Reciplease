@@ -38,17 +38,17 @@ class SearchResultTableViewCell: UITableViewCell {
             self.recipeImage.image = image
         }
     }
-    var recipe : Recipe! {
-        didSet {
-            self.recipeTitle.text = recipe.name
-            let ingredients = recipe.ingredientLines.joined(separator: ", ")
-            self.ingredientList.text = ingredients
-            self.ratingLabel.text = String(recipe.rating)
-            self.timeLabel.text = recipe.totalTime
-            let image = UIImage.recipeImage(recipe.images[0].hostedSmallUrl)
-            self.recipeImage.image = image
-        }
-    }
+//    var recipe : Recipe! {
+//        didSet {
+//            self.recipeTitle.text = recipe.name
+//            let ingredients = recipe.ingredientLines.joined(separator: ", ")
+//            self.ingredientList.text = ingredients
+//            self.ratingLabel.text = String(recipe.rating)
+//            self.timeLabel.text = recipe.totalTime
+//            let image = UIImage.recipeImage(recipe.images[0].hostedSmallUrl)
+//            self.recipeImage.image = image
+//        }
+//    }
 
     var favoriteRecipe : FavoriteRecipe! {
         didSet {

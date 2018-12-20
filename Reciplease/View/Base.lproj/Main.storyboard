@@ -415,7 +415,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell1" rowHeight="50" id="y3M-fG-2lb" customClass="ParametersTableViewCell" customModule="Reciplease" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell1" rowHeight="50" id="y3M-fG-2lb" customClass="ParametersHeaderTableViewCell" customModule="Reciplease" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="74" width="315" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y3M-fG-2lb" id="RcU-2n-Lkr">
@@ -446,8 +446,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="headerImage" destination="xlL-Oo-1HS" id="vh0-Kt-6MG"/>
-                                            <outlet property="headerLabel" destination="GQD-tO-EHD" id="hG3-QF-NgX"/>
+                                            <outlet property="headerImage" destination="xlL-Oo-1HS" id="PHa-10-XdI"/>
+                                            <outlet property="headerLabel" destination="GQD-tO-EHD" id="CjO-Sr-OGZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="parameters" id="iKp-gn-vvb" customClass="ParametersTableViewCell" customModule="Reciplease" customModuleProvider="target">
@@ -698,9 +698,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.2144360542" green="0.2008193731" blue="0.19597685340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="j7C-8f-0DT">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="0.2144360542" green="0.2008193731" blue="0.19597685340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="continue"/>
+                            <connections>
+                                <outlet property="delegate" destination="s78-pO-QQe" id="Tld-ks-LQK"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteRecipe" rowHeight="75" id="X25-YV-Xb9" customClass="SearchResultTableViewCell" customModule="Reciplease" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X25-YV-Xb9" id="eAB-Ah-WTR">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
@@ -816,6 +825,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Zcw-dM-udt"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoriteSearchBar" destination="j7C-8f-0DT" id="i97-Ek-Ied"/>
                         <outlet property="recipeListTableView" destination="OUj-j7-QV6" id="75T-BC-zRg"/>
                     </connections>
                 </tableViewController>
@@ -828,6 +838,6 @@
         <image name="star-white-small" width="50" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aRa-iG-UXH"/>
+        <segue reference="kkO-w5-DgD"/>
     </inferredMetricsTieBreakers>
 </document>

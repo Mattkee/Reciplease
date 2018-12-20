@@ -148,14 +148,23 @@ class RecipeViewController: UIViewController {
             return
         }
         self.recipeTime.text = time
-        let ingredients = Ingredient.all
-        ingredients.forEach { element in
-            if element.recipe == favoriteRecipe {
-                if let name = element.name {
-                    preparation.append(name)
-                }
-            }
+        guard let ingredients = favoriteRecipe?.ingredients?.allObjects as? [Ingredient] else {
+            return
         }
+        ingredients.forEach { element in
+            guard let name = element.name else {
+                return
+            }
+            preparation.append(name)
+        }
+//        let ingredients = Ingredient.all
+//        ingredients.forEach { element in
+//            if element.recipe == favoriteRecipe {
+//                if let name = element.name {
+//                    preparation.append(name)
+//                }
+//            }
+//        }
         guard let image = favoriteRecipe?.image else {
             print("4")
             return

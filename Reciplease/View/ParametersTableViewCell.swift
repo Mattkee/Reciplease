@@ -10,8 +10,6 @@ import UIKit
 
 class ParametersTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var headerImage: UIImageView!
-    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var cellLabel: UILabel!
     
     override func awakeFromNib() {
@@ -34,10 +32,6 @@ class ParametersTableViewCell: UITableViewCell {
 //        fatalError("init(coder:) has not been implemented")
 //    }
 
-    func headerSetupCell(image: UIImage, label: String) {
-        headerImage.image = image
-        headerLabel.text = label
-    }
     func cellListSetup(_ label: String) {
         cellLabel.text = label
     }

@@ -11,11 +11,16 @@ import UIKit
 class FavoriteTableViewController: UITableViewController {
 
     var favoriteRecipe = FavoriteRecipe.all
-    
+    var searchFavorite = [FavoriteRecipe]()
+    var searching = false
+
     var displayAlertDelegate: DisplayAlert?
     
     @IBOutlet var recipeListTableView: UITableView!
+
+    @IBOutlet weak var favoriteSearchBar: UISearchBar!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         displayAlertDelegate = self
@@ -27,6 +32,7 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.searchFavorite = [FavoriteRecipe]()
         self.favoriteRecipe = FavoriteRecipe.all
         recipeListTableView.reloadData()
     }
@@ -40,14 +46,22 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return favoriteRecipe.count
+        if searching {
+            return searchFavorite.count
+        } else {
+            return favoriteRecipe.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteRecipe", for: indexPath) as? SearchResultTableViewCell else {
             return UITableViewCell()
         }
-        cell.favoriteRecipe = favoriteRecipe[indexPath.row]
+        if searching {
+            cell.favoriteRecipe = searchFavorite[indexPath.row]
+        } else {
+            cell.favoriteRecipe = favoriteRecipe[indexPath.row]
+        }
         return cell
     }
     
@@ -73,5 +87,13 @@ class FavoriteTableViewController: UITableViewController {
         default :
             print("error")
         }
+    }
+}
+
+extension FavoriteTableViewController:  UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchFavorite = favoriteRecipe.filter({$0.name!.prefix(searchText.count) == searchText})
+        searching = true
+        recipeListTableView.reloadData()
     }
 }

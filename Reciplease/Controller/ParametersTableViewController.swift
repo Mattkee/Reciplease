@@ -42,9 +42,9 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
             self.allergies = listElement
         }
         twoDimensionalArray = [
-            Parameter(isExpanded: true, title: "Cooking Choice", list: cookingChoice),
-            Parameter(isExpanded: true, title: "Diets", list: diets),
-            Parameter(isExpanded: true, title: "Allergies", list: allergies)
+            Parameter(isExpanded: false, title: "Cooking Choice", list: cookingChoice),
+            Parameter(isExpanded: false, title: "Diets", list: diets),
+            Parameter(isExpanded: false, title: "Allergies", list: allergies)
         ]
     }
 
@@ -55,21 +55,38 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
         return twoDimensionalArray.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        let list = twoDimensionalArray[section].list
-        return list.count
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if twoDimensionalArray[indexPath.section].isExpanded == true {
+            return 45
+        } else {
+            return 0
+        }
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+//        let list = twoDimensionalArray[section].list
+//        return list.count
+        if twoDimensionalArray[section].isExpanded == true {
+            return twoDimensionalArray[section].list.count
+        } else {
+            return 0
+        }
+    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell1") as! ParametersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell1") as! ParametersHeaderTableViewCell
         cell.headerSetupCell(image: headerSectionImage[section], label: twoDimensionalArray[section].title)
+
+        cell.button.tag = section
+
+        cell.button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
         return cell
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "parameters", for: indexPath) as! ParametersTableViewCell
 
@@ -134,6 +151,15 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
             }
             Constant.alergiesParameters.remove(at: index)
         }
+    }
+    
+    @objc func handleExpandClose(_ button: UIButton) {
+        let section = button.tag
+
+        let isExpanded = twoDimensionalArray[section].isExpanded
+        twoDimensionalArray[section].isExpanded = !isExpanded
+        
+        parametersPopup.reloadData()
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
