@@ -89,10 +89,14 @@ class RecipeListTableViewController: UITableViewController {
                 guard let indexPath = tableView.indexPath(for: selectedRecipeCell) else {
                     fatalError("The selected cell is not being displayed by the table")
                 }
-                    guard let id = searchResult?.matches[indexPath.row].id else {
-                        fatalError("no id")
-                    }
-                    recipeViewController.recipeID = id
+                guard let id = searchResult?.matches[indexPath.row].id else {
+                    fatalError("no id")
+                }
+                guard let ingredients = searchResult?.matches[indexPath.row].ingredients else {
+                    fatalError("no ingredients")
+                }
+                recipeViewController.recipeID = id
+                recipeViewController.ingredients = ingredients
             
             default :
                 print("error")

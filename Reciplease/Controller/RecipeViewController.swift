@@ -15,6 +15,8 @@ class RecipeViewController: UIViewController {
 
     let recipeService = RecipeService()
     var recipeID : String?
+    var ingredients = [String]()
+
     var favorite : Bool {
         if recipeID != nil {
             let favorite = FavoriteRecipe.all.contains(where: { $0.id == recipeID })
@@ -88,7 +90,8 @@ class RecipeViewController: UIViewController {
             guard let recipe = recipe else {
                 return
             }
-            FavoriteRecipe.save(recipe.name, recipe.id, recipe.totalTime, String(recipe.rating), recipe.ingredientLines, recipe.images[0].hostedSmallUrl)
+            let listIngredient = ingredients.joined(separator: ", ")
+            FavoriteRecipe.save(recipe.name, recipe.id, recipe.totalTime, String(recipe.rating), recipe.ingredientLines, recipe.images[0].hostedSmallUrl, listIngredient)
 //            Constant.favorites.append(recipe)
 //            Constant.favorites.forEach { recipe in
 //                print(recipe.name)

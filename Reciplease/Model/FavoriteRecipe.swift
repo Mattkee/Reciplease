@@ -22,13 +22,14 @@ class FavoriteRecipe: NSManagedObject {
         let _ = try? AppDelegate.viewContext.execute(deleteRequest)
     }
 
-    static func save(_ name: String, _ id: String, _ totalTime: String, _ rating: String, _ ingredientList: [String], _ image : String) {
+    static func save(_ name: String, _ id: String, _ totalTime: String, _ rating: String, _ ingredientList: [String], _ image : String, _ ingredientsDetail: String) {
         let favoriteRecipe = FavoriteRecipe(context: AppDelegate.viewContext)
         favoriteRecipe.name = name
         favoriteRecipe.id = id
         favoriteRecipe.totalTime = totalTime
         favoriteRecipe.rating = rating
         favoriteRecipe.image = image
+        favoriteRecipe.ingredientsDetail = ingredientsDetail
         
         ingredientList.forEach { element in
             let ingredient = Ingredient(context: AppDelegate.viewContext)

@@ -32,6 +32,7 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.searchFavorite = [FavoriteRecipe]()
         self.favoriteRecipe = FavoriteRecipe.all
         recipeListTableView.reloadData()

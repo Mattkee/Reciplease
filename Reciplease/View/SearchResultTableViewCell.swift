@@ -53,9 +53,9 @@ class SearchResultTableViewCell: UITableViewCell {
     var favoriteRecipe : FavoriteRecipe! {
         didSet {
             self.recipeTitle.text = favoriteRecipe.name
-            let ingredientList = favoriteRecipe.ingredients?.allObjects as? [String] ?? [String]()
-            let ingredients = ingredientList.joined(separator: ", ")
-            self.ingredientList.text = ingredients
+//            let ingredientList = favoriteRecipe.ingredients?.allObjects as? [String] ?? [String]()
+//            let ingredients = ingredientList.joined(separator: ", ")
+            self.ingredientList.text = favoriteRecipe.ingredientsDetail
             self.ratingLabel.text = favoriteRecipe.rating
             self.timeLabel.text = favoriteRecipe.totalTime
             if let image = favoriteRecipe.image {
