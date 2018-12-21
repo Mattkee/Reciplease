@@ -16,8 +16,12 @@ struct Recipe : Decodable {
     let id : String
     let ingredientLines : [String]
     let rating : Int
+    let source : Source
 
     struct Images : Decodable {
         let hostedSmallUrl : String
+    }
+    struct Source : Decodable {
+        let sourceRecipeUrl : String
     }
 }

@@ -22,14 +22,24 @@ class FavoriteRecipe: NSManagedObject {
         let _ = try? AppDelegate.viewContext.execute(deleteRequest)
     }
 
-    static func save(_ name: String, _ id: String, _ totalTime: String, _ rating: String, _ ingredientList: [String], _ image : String, _ ingredientsDetail: String) {
+    static func fetch(_ name: String) -> [FavoriteRecipe] {
+        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
+        request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", name)
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        guard let recipe = try? AppDelegate.viewContext.fetch(request) else { return [] }
+        return recipe
+    }
+
+    static func save(_ recipe: Recipe, _ ingredientsDetail: String) {
         let favoriteRecipe = FavoriteRecipe(context: AppDelegate.viewContext)
-        favoriteRecipe.name = name
-        favoriteRecipe.id = id
-        favoriteRecipe.totalTime = totalTime
-        favoriteRecipe.rating = rating
-        favoriteRecipe.image = image
+        favoriteRecipe.name = recipe.name
+        favoriteRecipe.id = recipe.id
+        favoriteRecipe.totalTime = recipe.totalTime
+        favoriteRecipe.rating = String(recipe.rating)
+        favoriteRecipe.image = recipe.images[0].hostedSmallUrl
+        favoriteRecipe.sourceUrl = recipe.source.sourceRecipeUrl
         favoriteRecipe.ingredientsDetail = ingredientsDetail
+        let ingredientList = recipe.ingredientLines
         
         ingredientList.forEach { element in
             let ingredient = Ingredient(context: AppDelegate.viewContext)

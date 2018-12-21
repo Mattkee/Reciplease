@@ -12,13 +12,15 @@ class IngredientViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonform.layer.cornerRadius = 10
         ingredientTableView.dataSource = self
         ingredientTableView.reloadData()
         // Do any additional setup after loading the view.
     }
-    
+    @IBAction func unwindToIngredient(segue:UIStoryboardSegue) { }
     @IBOutlet weak var searchTextField: UITextField!
     
+
     @IBAction func addButton(_ sender: UIButton) {
         addText()
     }
@@ -32,6 +34,8 @@ class IngredientViewController: UIViewController {
     }
 
     @IBOutlet weak var ingredientTableView: UITableView!
+    @IBOutlet weak var buttonform: UIButton!
+    
     
     func clear() {
         Constant.ingredients = [String]()

@@ -10,7 +10,7 @@ import UIKit
 
 class ParametersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let headerSectionImage : [UIImage] = [#imageLiteral(resourceName: "breakfast"),#imageLiteral(resourceName: "breakfast"),#imageLiteral(resourceName: "breakfast")]
+    let headerSectionImage : [UIImage] = [#imageLiteral(resourceName: "cookingChoice"),#imageLiteral(resourceName: "diets"),#imageLiteral(resourceName: "allergies")]
     
     var cookingChoice = [ListElement]()
     var diets = [ListElement]()
@@ -19,6 +19,9 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
     var twoDimensionalArray = [Parameter]()
 
     @IBOutlet var parametersPopup: UITableView!
+    @IBOutlet weak var tableViewTitle: UILabel!
+    @IBOutlet weak var buttonSave: UIButton!
+    
     
     @IBAction func saveButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -28,7 +31,9 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         parametersPopup.delegate = self
         parametersPopup.dataSource = self
-        
+       
+        tableViewTitle.layer.cornerRadius = 10
+        buttonSave.layer.cornerRadius = 10
         parametersPopup.layer.cornerRadius = 10
         parametersPopup.layer.masksToBounds = true
         

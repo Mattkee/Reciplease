@@ -36,19 +36,7 @@ class RecipeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if favorite {
-            favoriteButton.image = UIImage(imageLiteralResourceName: "star-yellow-small")
-            let favorite = FavoriteRecipe.all.first(where: { $0.id == recipeID })
-            self.favoriteRecipe = favorite
-            displayFavorite()
-        } else {
-            guard let id = recipeID else {
-                return
-            }
-            searchRecipe(id)
-        }
-        
-        // Do any additional setup after loading the view
+        getDirectionsButton.layer.cornerRadius = 10
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,39 +54,51 @@ class RecipeViewController: UIViewController {
     }
     
     @IBOutlet weak var recipeName: UILabel!
-    @IBOutlet weak var recipeRating: UILabel!
     @IBOutlet weak var recipeTime: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    @IBOutlet weak var getDirectionsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var recipeView: UIView!
+    @IBOutlet var ratingImage: [UIImageView]!
     
-    @IBAction func addFavorite(_ sender: UIBarButtonItem) {
-        if sender.image == UIImage(imageLiteralResourceName: "star-yellow-small") {
-            sender.image = UIImage(imageLiteralResourceName: "star-white-small")
-            guard let recipeID = favoriteRecipe?.id else {
-                print("ça marche pas")
+    @IBAction func getDirections(_ sender: UIButton) {
+        if favorite {
+            guard let url = favoriteRecipe?.sourceUrl else {
                 return
             }
-            print("ça marche")
-            FavoriteRecipe.remove(recipeID)
-//            Constant.favorites.removeAll(where: { $0.name == recipeName })
-//            Constant.favorites.forEach { recipe in
-//                print(recipe.name)
-//            }
+            guard let link = URL(string: url) else {
+                return
+            }
+            UIApplication.shared.open(link)
         } else {
-            sender.image = UIImage(imageLiteralResourceName: "star-yellow-small")
+            guard let url = recipe?.source.sourceRecipeUrl else {
+                return
+            }
+            guard let link = URL(string: url) else {
+                return
+            }
+            UIApplication.shared.open(link)
+        }
+    }
+    
+    @IBAction func addFavorite(_ sender: UIBarButtonItem) {
+        if sender.image == #imageLiteral(resourceName: "star-yellow-small") {
+            sender.image = #imageLiteral(resourceName: "star-white-small")
+            guard let recipeID = favoriteRecipe?.id else {
+                return
+            }
+            FavoriteRecipe.remove(recipeID)
+        } else {
+            sender.image = #imageLiteral(resourceName: "star-yellow-small")
             guard let recipe = recipe else {
                 return
             }
             let listIngredient = ingredients.joined(separator: ", ")
-            FavoriteRecipe.save(recipe.name, recipe.id, recipe.totalTime, String(recipe.rating), recipe.ingredientLines, recipe.images[0].hostedSmallUrl, listIngredient)
-//            Constant.favorites.append(recipe)
-//            Constant.favorites.forEach { recipe in
-//                print(recipe.name)
-//            }
+            FavoriteRecipe.save(recipe, listIngredient)
         }
     }
-    
+
     func searchRecipe(_ recipeID : String) {
         recipeService.getRecipe(recipeID) { (error, recipe) in
             guard error == nil else {
@@ -121,7 +121,7 @@ class RecipeViewController: UIViewController {
         guard let rating = recipe?.rating else {
             return
         }
-        self.recipeRating.text = String(rating)
+        ratingDisplay(String(rating), ratingImage)
         guard let time = recipe?.totalTime else {
             return
         }
@@ -145,7 +145,7 @@ class RecipeViewController: UIViewController {
             print("2")
             return
         }
-        self.recipeRating.text = rating
+        ratingDisplay(String(rating), ratingImage)
         guard let time = favoriteRecipe?.totalTime else {
             print("3")
             return
@@ -160,14 +160,6 @@ class RecipeViewController: UIViewController {
             }
             preparation.append(name)
         }
-//        let ingredients = Ingredient.all
-//        ingredients.forEach { element in
-//            if element.recipe == favoriteRecipe {
-//                if let name = element.name {
-//                    preparation.append(name)
-//                }
-//            }
-//        }
         guard let image = favoriteRecipe?.image else {
             print("4")
             return

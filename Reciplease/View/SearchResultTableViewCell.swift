@@ -16,7 +16,6 @@ class SearchResultTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
@@ -38,23 +37,10 @@ class SearchResultTableViewCell: UITableViewCell {
             self.recipeImage.image = image
         }
     }
-//    var recipe : Recipe! {
-//        didSet {
-//            self.recipeTitle.text = recipe.name
-//            let ingredients = recipe.ingredientLines.joined(separator: ", ")
-//            self.ingredientList.text = ingredients
-//            self.ratingLabel.text = String(recipe.rating)
-//            self.timeLabel.text = recipe.totalTime
-//            let image = UIImage.recipeImage(recipe.images[0].hostedSmallUrl)
-//            self.recipeImage.image = image
-//        }
-//    }
 
     var favoriteRecipe : FavoriteRecipe! {
         didSet {
             self.recipeTitle.text = favoriteRecipe.name
-//            let ingredientList = favoriteRecipe.ingredients?.allObjects as? [String] ?? [String]()
-//            let ingredients = ingredientList.joined(separator: ", ")
             self.ingredientList.text = favoriteRecipe.ingredientsDetail
             self.ratingLabel.text = favoriteRecipe.rating
             self.timeLabel.text = favoriteRecipe.totalTime

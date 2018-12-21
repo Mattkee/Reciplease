@@ -6,6 +6,7 @@
         <attribute name="ingredientsDetail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
         <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FavoriteRecipe" inverseName="ingredients" inverseEntity="FavoriteRecipe" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FavoriteRecipe" positionX="-4081.28515625" positionY="-4739.375" width="128" height="150"/>
+        <element name="FavoriteRecipe" positionX="-4081.28515625" positionY="-4739.375" width="128" height="165"/>
         <element name="Ingredient" positionX="-3849.42578125" positionY="-4560.3359375" width="128" height="73"/>
     </elements>
 </model>
