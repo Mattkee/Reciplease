@@ -61,6 +61,10 @@ class RecipeListTableViewController: UITableViewController {
             return UITableViewCell()
         }
         cell.searchRecipe = searchResult?.matches[indexPath.row]
+        guard let rating = searchResult?.matches[indexPath.row].rating else {
+            return UITableViewCell()
+        }
+        ratingDisplay(String(rating), cell.ratingStar)
         return cell
     }
    

@@ -11,6 +11,7 @@ class SearchResultTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.cornerRadius = 20
         // Initialization code
     }
 
@@ -21,16 +22,16 @@ class SearchResultTableViewCell: UITableViewCell {
 
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet var ratingStar: [UIImageView]!
     
     var searchRecipe : SearchRecipe.Matches! {
         didSet {
             self.recipeTitle.text = searchRecipe.recipeName
             let ingredients = searchRecipe.ingredients.joined(separator: ", ")
             self.ingredientList.text = ingredients
-            self.ratingLabel.text = String(searchRecipe.rating)
+            
             let time = timeFormatted(totalSeconds: searchRecipe.totalTimeInSeconds)
             self.timeLabel.text = time
             let image = UIImage.recipeImage(searchRecipe.smallImageUrls[0])
@@ -42,7 +43,7 @@ class SearchResultTableViewCell: UITableViewCell {
         didSet {
             self.recipeTitle.text = favoriteRecipe.name
             self.ingredientList.text = favoriteRecipe.ingredientsDetail
-            self.ratingLabel.text = favoriteRecipe.rating
+            
             self.timeLabel.text = favoriteRecipe.totalTime
             if let image = favoriteRecipe.image {
                 self.recipeImage.image = UIImage.recipeImage(image)

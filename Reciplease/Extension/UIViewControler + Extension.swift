@@ -33,10 +33,10 @@ extension UIViewController : DisplayAlert {
         }
     }
     func collectionImageView(_ collectionImage: [UIImageView],_ oneStar: Bool,_ twoStar: Bool,_ threeStar: Bool,_ fourStar: Bool,_ fiveStar: Bool) {
-        collectionImage[0].image = oneStar ? #imageLiteral(resourceName: "star-yellow-small") : #imageLiteral(resourceName: "star-white-small")
-        collectionImage[1].image = twoStar ? #imageLiteral(resourceName: "star-yellow-small") : #imageLiteral(resourceName: "star-white-small")
-        collectionImage[2].image = threeStar ? #imageLiteral(resourceName: "star-yellow-small") : #imageLiteral(resourceName: "star-white-small")
-        collectionImage[3].image = fourStar ? #imageLiteral(resourceName: "star-yellow-small") : #imageLiteral(resourceName: "star-white-small")
-        collectionImage[4].image = fiveStar ? #imageLiteral(resourceName: "star-yellow-small") : #imageLiteral(resourceName: "star-white-small")
+        collectionImage[0].image = oneStar ? #imageLiteral(resourceName: "star-yellow-verysmall") : #imageLiteral(resourceName: "black-small-star")
+        collectionImage[1].image = twoStar ? #imageLiteral(resourceName: "star-yellow-verysmall") : #imageLiteral(resourceName: "black-small-star")
+        collectionImage[2].image = threeStar ? #imageLiteral(resourceName: "star-yellow-verysmall") : #imageLiteral(resourceName: "black-small-star")
+        collectionImage[3].image = fourStar ? #imageLiteral(resourceName: "star-yellow-verysmall") : #imageLiteral(resourceName: "black-small-star")
+        collectionImage[4].image = fiveStar ? #imageLiteral(resourceName: "star-yellow-verysmall") : #imageLiteral(resourceName: "black-small-star")
     }
 }

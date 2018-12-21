@@ -57,6 +57,10 @@ class FavoriteTableViewController: UITableViewController {
             return UITableViewCell()
         }
         cell.favoriteRecipe = favoriteRecipe[indexPath.row]
+        guard let rating = favoriteRecipe[indexPath.row].rating else {
+            return UITableViewCell()
+        }
+        ratingDisplay(String(rating), cell.ratingStar)
         return cell
     }
     
