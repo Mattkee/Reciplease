@@ -21,6 +21,7 @@ class FavoriteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayAlertDelegate = self
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +61,7 @@ class FavoriteTableViewController: UITableViewController {
         guard let rating = favoriteRecipe[indexPath.row].rating else {
             return UITableViewCell()
         }
+
         ratingDisplay(String(rating), cell.ratingStar)
         return cell
     }

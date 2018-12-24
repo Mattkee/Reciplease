@@ -12,6 +12,7 @@ class SearchResultTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 20
+        setupRating()
         // Initialization code
     }
 
@@ -24,6 +25,8 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var ingredientList: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var ratingStackView: UIStackView!
+    
     @IBOutlet var ratingStar: [UIImageView]!
     
     var searchRecipe : SearchRecipe.Matches! {
@@ -61,6 +64,14 @@ class SearchResultTableViewCell: UITableViewCell {
             return String(format: "%02dmin", minutes)
         } else {
             return String(format: "%01dh %02dmin", hours, minutes)
+        }
+    }
+    private func setupRating() {
+        for _ in 0..<5 {
+            let imageView = UIImageView()
+            ratingStackView.addArrangedSubview(imageView)
+            
+            ratingStar.append(imageView)
         }
     }
 }
