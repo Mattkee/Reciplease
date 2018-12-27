@@ -36,12 +36,15 @@ class RecipeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRating()
+        favoriteButton.setImage(#imageLiteral(resourceName: "add-favorite"), for: .normal)
+        favoriteButton.setImage(#imageLiteral(resourceName: "favorite"), for: .selected)
         getDirectionsButton.layer.cornerRadius = 10
     }
 
     override func viewWillAppear(_ animated: Bool) {
         if favorite {
-            favoriteButton.image = UIImage(imageLiteralResourceName: "star-yellow-small")
+            favoriteButton.isSelected = true
             let favorite = FavoriteRecipe.all.first(where: { $0.id == recipeID })
             self.favoriteRecipe = favorite
             displayFavorite()
@@ -56,10 +59,11 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeTime: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var getDirectionsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var recipeView: UIView!
+    @IBOutlet weak var ratingStackView: UIStackView!
+    
     @IBOutlet var ratingImage: [UIImageView]!
     
     @IBAction func getDirections(_ sender: UIButton) {
@@ -82,15 +86,15 @@ class RecipeViewController: UIViewController {
         }
     }
     
-    @IBAction func addFavorite(_ sender: UIBarButtonItem) {
-        if sender.image == #imageLiteral(resourceName: "star-yellow-small") {
-            sender.image = #imageLiteral(resourceName: "star-white-small")
+    @IBAction func addFavorite(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
             guard let recipeID = favoriteRecipe?.id else {
                 return
             }
             FavoriteRecipe.remove(recipeID)
         } else {
-            sender.image = #imageLiteral(resourceName: "star-yellow-small")
+            sender.isSelected = true
             guard let recipe = recipe else {
                 return
             }
@@ -165,6 +169,13 @@ class RecipeViewController: UIViewController {
             return
         }
         self.recipeImage.image = UIImage.recipeImage(image)
+    }
+    private func setupRating() {
+        for _ in 0..<5 {
+            let imageView = UIImageView()
+            ratingStackView.addArrangedSubview(imageView)
+            ratingImage.append(imageView)
+        }
     }
 }
 

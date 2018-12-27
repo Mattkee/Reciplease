@@ -12,16 +12,18 @@ class ParametersHeaderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
         self.layer.cornerRadius = 10
-        button.setTitle("close", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        accessoryView = button
+//        button.setTitle("close", for: .normal)
+//        button.setImage(#imageLiteral(resourceName: "add-image"), for: .normal)
+//        button.setTitleColor(.black, for: .normal)
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+//        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        accessoryView = addButton
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,7 +31,7 @@ class ParametersHeaderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    var button = UIButton(type: .system)
+//    var button = UIButton(type: .system)
 
     func headerSetupCell(image: UIImage, label: String) {
         headerImage.image = image

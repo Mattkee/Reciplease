@@ -83,9 +83,11 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell1") as! ParametersHeaderTableViewCell
         cell.headerSetupCell(image: headerSectionImage[section], label: twoDimensionalArray[section].title)
 
-        cell.button.tag = section
+        cell.addButton.tag = section
+        let isExpanded = twoDimensionalArray[section].isExpanded
+        cell.addButton.setImage(isExpanded ? #imageLiteral(resourceName: "close-image") : #imageLiteral(resourceName: "add-image") ,for: .normal)
 
-        cell.button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        cell.addButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
         return cell
     }
 
@@ -160,7 +162,7 @@ class ParametersViewController: UIViewController, UITableViewDataSource, UITable
 
         let isExpanded = twoDimensionalArray[section].isExpanded
         twoDimensionalArray[section].isExpanded = !isExpanded
-        
+
         parametersPopup.reloadData()
     }
     /*

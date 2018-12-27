@@ -1,62 +1,57 @@
 //
-//  SearchResultTableViewCell.swift
+//  FavoriteTableViewCell.swift
 //  Reciplease
 //
-//  Created by Lei et Matthieu on 24/10/2018.
+//  Created by Lei et Matthieu on 27/12/2018.
 //  Copyright © 2018 Mattkee. All rights reserved.
 //
+
 import UIKit
 
-class SearchResultTableViewCell: UITableViewCell {
+class FavoriteTableViewCell: UITableViewCell {
 
-    var link : RecipeListTableViewController?
-    var isFavorite = false
-
+    var link : FavoriteTableViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 20
         setupRating()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-
+    
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var addFavoriteButton: UIButton!
-    @IBOutlet weak var favoriteActivityIndicator: UIActivityIndicatorView!
     
     
     @IBOutlet var ratingStar: [UIImageView]!
     
     @IBAction func addRemoteFavorite(_ sender: UIButton) {
-        favoriteActivityIndicator.color = .black
-        favoriteActivityIndicator.isHidden = false
-        favoriteActivityIndicator.startAnimating()
-        addFavoriteButton.isHidden = true
-        link?.addRemoveFavorite(self)
+        link?.removeFavorite(self)
     }
     
-    
-    var searchRecipe : SearchRecipe.Matches! {
+    var favoriteRecipe : FavoriteRecipe! {
         didSet {
-            self.recipeTitle.text = searchRecipe.recipeName
-            let ingredients = searchRecipe.ingredients.joined(separator: ", ")
-            self.ingredientList.text = ingredients
+            self.recipeTitle.text = favoriteRecipe.name
+            self.ingredientList.text = favoriteRecipe.ingredientsDetail
             
-            let time = timeFormatted(totalSeconds: searchRecipe.totalTimeInSeconds)
-            self.timeLabel.text = time
-            let image = UIImage.recipeImage(searchRecipe.smallImageUrls[0])
-            self.recipeImage.image = image
+            self.timeLabel.text = favoriteRecipe.totalTime
+            if let image = favoriteRecipe.image {
+                self.recipeImage.image = UIImage.recipeImage(image)
+            } else {
+                self.recipeImage.image = UIImage(imageLiteralResourceName: "breakfast")
+            }
         }
     }
-
+    
     private  func timeFormatted(totalSeconds: Int) -> String {
         //        let seconds: Int = totalSeconds % 60
         let minutes: Int = (totalSeconds / 60) % 60
