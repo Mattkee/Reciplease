@@ -43,31 +43,22 @@ class RecipeListTableViewController: UITableViewController {
             self.recipeListTableView.reloadData()
         }
     }
-    
-    // MARK: - Table view data source
 
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
             guard let recipes = searchResult?.matches else {
                 return 0
             }
             return recipes.count
     }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipe", for: indexPath) as? SearchResultTableViewCell else {
             return UITableViewCell()
         }
         cell.searchRecipe = searchResult?.matches[indexPath.row]
-        guard let rating = searchResult?.matches[indexPath.row].rating else {
-            return UITableViewCell()
-        }
-        ratingDisplay(String(rating), cell.ratingStar)
         
         var isFavorite : Bool {
             if let recipe = searchResult?.matches[indexPath.row] {
@@ -78,11 +69,7 @@ class RecipeListTableViewController: UITableViewController {
             }
         }
         cell.link = self
-        cell.isFavorite = isFavorite
-        cell.addFavoriteButton.setImage(isFavorite ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "add-favorite"), for: .normal)
-        cell.favoriteActivityIndicator.stopAnimating()
-        cell.favoriteActivityIndicator.isHidden = true
-        cell.addFavoriteButton.isHidden = false
+        cell.favorite(isFavorite)
         return cell
     }
 
@@ -91,7 +78,7 @@ class RecipeListTableViewController: UITableViewController {
             return UITableViewCell()
         }
         cell.activityIndicator.startAnimating()
-        cell.label.text = "wait upload..."
+        cell.label.text = "please wait, we are looking for recipes..."
         return cell
     }
 
@@ -99,10 +86,8 @@ class RecipeListTableViewController: UITableViewController {
         return activityIndicator ? 200 : 0
     }
     // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         switch(segue.identifier) {
             case "recipe":
                 guard let recipeViewController = segue.destination as? RecipeViewController else {
@@ -111,7 +96,6 @@ class RecipeListTableViewController: UITableViewController {
                 guard let selectedRecipeCell = sender as? SearchResultTableViewCell else {
                     fatalError("error envoi")
                 }
-                
                 guard let indexPath = tableView.indexPath(for: selectedRecipeCell) else {
                     fatalError("The selected cell is not being displayed by the table")
                 }
@@ -123,11 +107,11 @@ class RecipeListTableViewController: UITableViewController {
                 }
                 recipeViewController.recipeID = id
                 recipeViewController.ingredients = ingredients
-            
             default :
                 print("error")
         }
     }
+
     func addRemoveFavorite(_ cell: UITableViewCell) {
         guard let indexPath = recipeListTableView.indexPath(for: cell) else {
             return

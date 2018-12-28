@@ -14,29 +14,22 @@ class FavoriteTableViewController: UITableViewController {
     var displayAlertDelegate: DisplayAlert?
     
     @IBOutlet var recipeListTableView: UITableView!
-
     @IBOutlet weak var favoriteSearchBar: UISearchBar!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         displayAlertDelegate = self
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
         self.favoriteRecipe = FavoriteRecipe.all
         recipeListTableView.reloadData()
     }
-    
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return favoriteRecipe.count
@@ -49,7 +42,6 @@ class FavoriteTableViewController: UITableViewController {
         label.textColor = .darkGray
         return label
     }
-    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return favoriteRecipe.isEmpty ? 200 : 0
     }
@@ -58,11 +50,6 @@ class FavoriteTableViewController: UITableViewController {
             return UITableViewCell()
         }
         cell.favoriteRecipe = favoriteRecipe[indexPath.row]
-        guard let rating = favoriteRecipe[indexPath.row].rating else {
-            return UITableViewCell()
-        }
-
-        ratingDisplay(String(rating), cell.ratingStar)
 
         var isFavorite : Bool {
             if let recipe = favoriteRecipe[indexPath.row].id {
@@ -79,16 +66,15 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
+
         switch(segue.identifier) {
         case "favoriteRecipe":
             guard let recipeViewController = segue.destination as? RecipeViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
-            guard let selectedRecipeCell = sender as? SearchResultTableViewCell else {
+            guard let selectedRecipeCell = sender as? FavoriteTableViewCell else {
                 fatalError("error envoi")
             }
             
@@ -96,6 +82,7 @@ class FavoriteTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             recipeViewController.favoriteRecipe = favoriteRecipe[indexPath.row]
+            recipeViewController.recipeID = favoriteRecipe[indexPath.row].id
             
         default :
             print("error")

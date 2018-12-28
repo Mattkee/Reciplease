@@ -199,7 +199,7 @@
         <scene sceneID="phX-mm-g3q">
             <objects>
                 <viewController title="Reciplease" id="kE2-vb-sjn" customClass="RecipeViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1H5-g1-LaX">
+                    <view key="view" contentMode="scaleToFill" id="1H5-g1-LaX" customClass="RecipeView" customModule="Reciplease" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -326,6 +326,13 @@
                             <constraint firstItem="n6r-XH-4q5" firstAttribute="trailing" secondItem="R3w-mz-QpE" secondAttribute="trailing" constant="30" id="vHf-jh-RZk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n6r-XH-4q5"/>
+                        <connections>
+                            <outlet property="ratingStackView" destination="RF2-j1-oQU" id="rEc-uq-MaT"/>
+                            <outlet property="recipeImage" destination="Ez7-Rl-Umc" id="er1-JI-lgR"/>
+                            <outlet property="recipeName" destination="YG3-TJ-W7z" id="dzn-db-x4c"/>
+                            <outlet property="recipeTime" destination="tZY-5r-j5o" id="GX9-8c-f8M"/>
+                            <outletCollection property="ratingImage" destination="zWd-6B-5Hc" collectionClass="NSMutableArray" id="ayU-lT-SBu"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" leftItemsSupplementBackButton="YES" id="TVW-AE-Ymx">
                         <barButtonItem key="backBarButtonItem" title="Back" id="IeL-Mz-wMG"/>
@@ -333,12 +340,8 @@
                     <connections>
                         <outlet property="favoriteButton" destination="BRf-Kh-Hr5" id="qhZ-kb-Qej"/>
                         <outlet property="getDirectionsButton" destination="R3w-mz-QpE" id="PQy-fU-Uf7"/>
-                        <outlet property="ratingStackView" destination="RF2-j1-oQU" id="Uln-UT-bAd"/>
-                        <outlet property="recipeImage" destination="Ez7-Rl-Umc" id="hLx-ci-fCM"/>
-                        <outlet property="recipeName" destination="YG3-TJ-W7z" id="cJD-Rb-ORG"/>
-                        <outlet property="recipeTime" destination="tZY-5r-j5o" id="0nI-DH-9UR"/>
+                        <outlet property="recipeView" destination="1H5-g1-LaX" id="alg-QH-Q78"/>
                         <outlet property="tableView" destination="iHz-yF-3XN" id="wPA-yW-dKV"/>
-                        <outletCollection property="ratingImage" destination="zWd-6B-5Hc" collectionClass="NSMutableArray" id="M8W-zr-0Y0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5U-U2-wBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -565,7 +568,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3cQ-oA-jMA"/>
                                     <segue destination="TLt-Q7-OO6" kind="show" id="7CQ-dz-UGy"/>
                                 </connections>
                             </button>

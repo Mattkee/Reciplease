@@ -15,7 +15,7 @@ class SearchResultTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 20
-        setupRating()
+        setupRating(ratingStackView, &ratingStar)
         // Initialization code
     }
 
@@ -31,8 +31,6 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var addFavoriteButton: UIButton!
     @IBOutlet weak var favoriteActivityIndicator: UIActivityIndicatorView!
-    
-    
     @IBOutlet var ratingStar: [UIImageView]!
     
     @IBAction func addRemoteFavorite(_ sender: UIButton) {
@@ -42,8 +40,7 @@ class SearchResultTableViewCell: UITableViewCell {
         addFavoriteButton.isHidden = true
         link?.addRemoveFavorite(self)
     }
-    
-    
+
     var searchRecipe : SearchRecipe.Matches! {
         didSet {
             self.recipeTitle.text = searchRecipe.recipeName
@@ -54,25 +51,14 @@ class SearchResultTableViewCell: UITableViewCell {
             self.timeLabel.text = time
             let image = UIImage.recipeImage(searchRecipe.smallImageUrls[0])
             self.recipeImage.image = image
+            ratingDisplay(String(searchRecipe.rating), ratingStar)
         }
     }
-
-    private  func timeFormatted(totalSeconds: Int) -> String {
-        //        let seconds: Int = totalSeconds % 60
-        let minutes: Int = (totalSeconds / 60) % 60
-        let hours: Int = totalSeconds / 3600
-        if hours == 0 {
-            return String(format: "%02dmin", minutes)
-        } else {
-            return String(format: "%01dh %02dmin", hours, minutes)
-        }
-    }
-    private func setupRating() {
-        for _ in 0..<5 {
-            let imageView = UIImageView()
-            ratingStackView.addArrangedSubview(imageView)
-            
-            ratingStar.append(imageView)
-        }
+    func favorite(_ isFavorite: Bool) {
+        self.isFavorite = isFavorite
+        addFavoriteButton.setImage(isFavorite ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "add-favorite"), for: .normal)
+        favoriteActivityIndicator.stopAnimating()
+        favoriteActivityIndicator.isHidden = true
+        addFavoriteButton.isHidden = false
     }
 }

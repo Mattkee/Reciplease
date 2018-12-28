@@ -16,22 +16,13 @@ class ParametersHeaderTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         self.layer.cornerRadius = 10
-//        button.setTitle("close", for: .normal)
-//        button.setImage(#imageLiteral(resourceName: "add-image"), for: .normal)
-//        button.setTitleColor(.black, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-//        button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-//        accessoryView = addButton
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-
-//    var button = UIButton(type: .system)
 
     func headerSetupCell(image: UIImage, label: String) {
         headerImage.image = image

@@ -15,7 +15,7 @@ class FavoriteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 20
-        setupRating()
+        setupRating(ratingStackView, &ratingStar)
         // Initialization code
     }
     
@@ -30,8 +30,6 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var addFavoriteButton: UIButton!
-    
-    
     @IBOutlet var ratingStar: [UIImageView]!
     
     @IBAction func addRemoteFavorite(_ sender: UIButton) {
@@ -49,25 +47,10 @@ class FavoriteTableViewCell: UITableViewCell {
             } else {
                 self.recipeImage.image = UIImage(imageLiteralResourceName: "breakfast")
             }
-        }
-    }
-    
-    private  func timeFormatted(totalSeconds: Int) -> String {
-        //        let seconds: Int = totalSeconds % 60
-        let minutes: Int = (totalSeconds / 60) % 60
-        let hours: Int = totalSeconds / 3600
-        if hours == 0 {
-            return String(format: "%02dmin", minutes)
-        } else {
-            return String(format: "%01dh %02dmin", hours, minutes)
-        }
-    }
-    private func setupRating() {
-        for _ in 0..<5 {
-            let imageView = UIImageView()
-            ratingStackView.addArrangedSubview(imageView)
-            
-            ratingStar.append(imageView)
+            guard let rating = favoriteRecipe.rating else {
+                return
+            }
+            ratingDisplay(rating, ratingStar)
         }
     }
 }

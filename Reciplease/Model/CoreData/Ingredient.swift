@@ -9,11 +9,4 @@
 import Foundation
 import CoreData
 
-class Ingredient: NSManagedObject {
-//    static var all: [Ingredient] {
-//        let request: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
-//        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-//        guard let ingredient = try? AppDelegate.viewContext.fetch(request) else { return [] }
-//        return ingredient
-//    }
-}
+class Ingredient: NSManagedObject {}

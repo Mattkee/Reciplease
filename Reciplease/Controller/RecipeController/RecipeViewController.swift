@@ -12,31 +12,24 @@ class RecipeViewController: UIViewController {
 
     var recipe: Recipe?
     var favoriteRecipe: FavoriteRecipe?
-
     let recipeService = RecipeService()
     var recipeID : String?
     var ingredients = [String]()
+    var preparation = [String]()
+    var displayAlertDelegate: DisplayAlert?
 
     var favorite : Bool {
         if recipeID != nil {
             let favorite = FavoriteRecipe.all.contains(where: { $0.id == recipeID })
-            return favorite
-        } else if favoriteRecipe != nil {
-            let favorite = FavoriteRecipe.all.contains(where: { $0.id == favoriteRecipe?.id })
-            recipeID = favoriteRecipe?.id
             return favorite
         } else {
             return false
         }
     }
 
-    var preparation = [String]()
-
-    var displayAlertDelegate: DisplayAlert?
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRating()
+        recipeView.setupRating(recipeView.ratingStackView, &recipeView.ratingImage)
         favoriteButton.setImage(#imageLiteral(resourceName: "add-favorite"), for: .normal)
         favoriteButton.setImage(#imageLiteral(resourceName: "favorite"), for: .selected)
         getDirectionsButton.layer.cornerRadius = 10
@@ -55,16 +48,12 @@ class RecipeViewController: UIViewController {
             searchRecipe(id)
         }
     }
-    
-    @IBOutlet weak var recipeName: UILabel!
-    @IBOutlet weak var recipeTime: UILabel!
-    @IBOutlet weak var recipeImage: UIImageView!
+
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var getDirectionsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var ratingStackView: UIStackView!
+    @IBOutlet weak var recipeView: RecipeView!
     
-    @IBOutlet var ratingImage: [UIImageView]!
     
     @IBAction func getDirections(_ sender: UIButton) {
         if favorite {
@@ -117,44 +106,19 @@ class RecipeViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+
     func displayRecipe(){
-        guard let name = recipe?.name else {
-            return
-        }
-        self.recipeName.text = name
-        guard let rating = recipe?.rating else {
-            return
-        }
-        ratingDisplay(String(rating), ratingImage)
-        guard let time = recipe?.totalTime else {
-            return
-        }
-        self.recipeTime.text = time
+        recipeView.recipe = recipe
+
         guard let ingredientLine = recipe?.ingredientLines else {
             return
         }
         self.preparation = ingredientLine
-        guard let image = recipe?.images[0].hostedSmallUrl else {
-            return
-        }
-        self.recipeImage.image = UIImage.recipeImage(image)
     }
+
     func displayFavorite() {
-        guard let name = favoriteRecipe?.name else {
-            print("1")
-            return
-        }
-        self.recipeName.text = name
-        guard let rating = favoriteRecipe?.rating else {
-            print("2")
-            return
-        }
-        ratingDisplay(String(rating), ratingImage)
-        guard let time = favoriteRecipe?.totalTime else {
-            print("3")
-            return
-        }
-        self.recipeTime.text = time
+        recipeView.favoriteRecipe = favoriteRecipe
+
         guard let ingredients = favoriteRecipe?.ingredients?.allObjects as? [Ingredient] else {
             return
         }
@@ -163,18 +127,6 @@ class RecipeViewController: UIViewController {
                 return
             }
             preparation.append(name)
-        }
-        guard let image = favoriteRecipe?.image else {
-            print("4")
-            return
-        }
-        self.recipeImage.image = UIImage.recipeImage(image)
-    }
-    private func setupRating() {
-        for _ in 0..<5 {
-            let imageView = UIImageView()
-            ratingStackView.addArrangedSubview(imageView)
-            ratingImage.append(imageView)
         }
     }
 }
@@ -186,13 +138,11 @@ extension RecipeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return preparation.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ingredient", for: indexPath)
-        
         let nameIngredient = "-  \(self.preparation[indexPath.row])"
         cell.textLabel?.text = nameIngredient
-        
+
         return cell
     }
 }

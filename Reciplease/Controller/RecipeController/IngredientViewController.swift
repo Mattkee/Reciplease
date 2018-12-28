@@ -17,31 +17,23 @@ class IngredientViewController: UIViewController {
         ingredientTableView.reloadData()
         // Do any additional setup after loading the view.
     }
-    @IBAction func unwindToIngredient(segue:UIStoryboardSegue) { }
+
     @IBOutlet weak var searchTextField: UITextField!
-    
-
-    @IBAction func addButton(_ sender: UIButton) {
-        addText()
-    }
-    
-    @IBAction func clearButton(_ sender: UIButton) {
-        clear()
-    }
-    
-    @IBAction func searchButton(_ sender: UIButton) {
-       
-    }
-
     @IBOutlet weak var ingredientTableView: UITableView!
     @IBOutlet weak var buttonform: UIButton!
     
-    
+    @IBAction func addButton(_ sender: UIButton) {
+        addText()
+    }
+    @IBAction func clearButton(_ sender: UIButton) {
+        clear()
+    }
+
     func clear() {
         Constant.ingredients = [String]()
         ingredientTableView.reloadData()
     }
-    
+
     func ingredienttext(_ text: String) -> [String] {
         var list = text.components(separatedBy: ", ")
         list.forEach { element in
@@ -53,6 +45,7 @@ class IngredientViewController: UIViewController {
         }
         return list
     }
+
     func addText() {
         guard let text = searchTextField.text else {
             return
@@ -78,7 +71,6 @@ extension IngredientViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constant.ingredients.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredient", for: indexPath)
         
