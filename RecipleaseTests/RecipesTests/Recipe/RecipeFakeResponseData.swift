@@ -1,15 +1,14 @@
 //
-//  FakeResponseData.swift
+//  RecipeFakeResponseData.swift
 //  RecipleaseTests
 //
-//  Created by Lei et Matthieu on 08/11/2018.
+//  Created by Lei et Matthieu on 29/12/2018.
 //  Copyright © 2018 Mattkee. All rights reserved.
 //
 
 import Foundation
-import Alamofire
 
-class FakeResponseData {
+class RecipeFakeResponseData {
     static let responseOK = HTTPURLResponse(
         url: URL(string: "https://openclassrooms.com")!,
         statusCode: 200, httpVersion: nil, headerFields: [:])!
