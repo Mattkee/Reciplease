@@ -19,11 +19,11 @@ class RecipeServiceTestCase: XCTestCase {
     func testGetRecipeShouldPostFailedCallbackIfError() {
         let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.error)
         let alamofireRequest = AlamofireRequestFake(fakeResponse: fakeResponse)
-        let recipeService = RecipeService(router: Router<RecipeAPI, Recipe>(alamofireRequest: alamofireRequest))
+        let recipeService = RecipeService(router: Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: alamofireRequest))
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        recipeService.getRecipe { (error, recipe) in
+        recipeService.getSearchRecipe { (error, recipe) in
             XCTAssertNotNil(error)
             XCTAssertNil(recipe)
             expectation.fulfill()
@@ -36,11 +36,11 @@ class RecipeServiceTestCase: XCTestCase {
         // Given
         let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: nil, error: nil)
         let alamofireRequest = AlamofireRequestFake(fakeResponse: fakeResponse)
-        let recipeService = RecipeService(router: Router<RecipeAPI, Recipe>(alamofireRequest: alamofireRequest))
+        let recipeService = RecipeService(router: Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: alamofireRequest))
         
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        recipeService.getRecipe { (error, recipe) in
+        recipeService.getSearchRecipe { (error, recipe) in
             // Then
             XCTAssertNotNil(error)
             XCTAssertNil(recipe)
@@ -54,11 +54,11 @@ class RecipeServiceTestCase: XCTestCase {
         // Given
         let fakeResponse = FakeResponse(response: FakeResponseData.responseKO, data: FakeResponseData.recipeCorrectData, error: nil)
         let alamofireRequest = AlamofireRequestFake(fakeResponse: fakeResponse)
-        let recipeService = RecipeService(router: Router<RecipeAPI, Recipe>(alamofireRequest: alamofireRequest))
+        let recipeService = RecipeService(router: Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: alamofireRequest))
         
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        recipeService.getRecipe { (error, recipe) in
+        recipeService.getSearchRecipe { (error, recipe) in
         
             // Then
             XCTAssertNotNil(error)
@@ -73,11 +73,11 @@ class RecipeServiceTestCase: XCTestCase {
         // Given
         let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: FakeResponseData.recipeIncorrectData, error: nil)
         let alamofireRequest = AlamofireRequestFake(fakeResponse: fakeResponse)
-        let recipeService = RecipeService(router: Router<RecipeAPI, Recipe>(alamofireRequest: alamofireRequest))
+        let recipeService = RecipeService(router: Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: alamofireRequest))
         
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        recipeService.getRecipe { (error, recipe) in
+        recipeService.getSearchRecipe { (error, recipe) in
             // Then
             XCTAssertNotNil(error)
             XCTAssertNil(recipe)
@@ -91,11 +91,11 @@ class RecipeServiceTestCase: XCTestCase {
         // Given
         let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: FakeResponseData.recipeCorrectData, error: nil)
         let alamofireRequest = AlamofireRequestFake(fakeResponse: fakeResponse)
-        let recipeService = RecipeService(router: Router<RecipeAPI, Recipe>(alamofireRequest: alamofireRequest))
+        let recipeService = RecipeService(router: Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: alamofireRequest))
         
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        recipeService.getRecipe { (error, recipe) in
+        recipeService.getSearchRecipe { (error, recipe) in
             // Then
             XCTAssertNil(error)
             XCTAssertNotNil(recipe)

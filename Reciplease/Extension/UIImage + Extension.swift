@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// MARK: - Image Management
 extension UIImage {
     class func recipeImage(_ url: String) -> UIImage {
         let finalUrl = String(url.dropLast(2) + "300")
@@ -19,7 +20,6 @@ extension UIImage {
         guard let imageData = try? Data(contentsOf: imageUrl) else {
             return UIImage(imageLiteralResourceName: "breakfast")
         }
-        
         guard let image = UIImage(data: imageData) else {
             return UIImage(imageLiteralResourceName: "breakfast")
         }
