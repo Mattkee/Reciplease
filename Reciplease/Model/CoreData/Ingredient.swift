@@ -9,4 +9,5 @@
 import Foundation
 import CoreData
 
+// CoreData object
 class Ingredient: NSManagedObject {}

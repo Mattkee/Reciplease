@@ -9,7 +9,7 @@
 import UIKit
 
 class RecipeViewController: UIViewController {
-
+    // MARK: - Properties
     var recipe: Recipe?
     var favoriteRecipe: FavoriteRecipe?
     let recipeService = RecipeService()
@@ -48,13 +48,56 @@ class RecipeViewController: UIViewController {
             searchRecipe(id)
         }
     }
-
+    // MARK: - Outlets
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var getDirectionsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var recipeView: RecipeView!
+}
+
+// MARK: - Methods
+extension RecipeViewController {
+    func searchRecipe(_ recipeID : String) {
+        recipeService.getRecipe(recipeID) { (error, recipe) in
+            guard error == nil else {
+                guard let error = error else {
+                    return
+                }
+                self.showAlert(title: Constant.titleAlert, message: error)
+                return
+            }
+            self.recipe = recipe
+            self.displayRecipe()
+            self.tableView.reloadData()
+        }
+    }
     
+    func displayRecipe(){
+        recipeView.recipe = recipe
+        
+        guard let ingredientLine = recipe?.ingredientLines else {
+            return
+        }
+        self.preparation = ingredientLine
+    }
     
+    func displayFavorite() {
+        recipeView.favoriteRecipe = favoriteRecipe
+        
+        guard let ingredients = favoriteRecipe?.ingredients?.allObjects as? [Ingredient] else {
+            return
+        }
+        ingredients.forEach { element in
+            guard let name = element.name else {
+                return
+            }
+            preparation.append(name)
+        }
+    }
+}
+
+// MARK: - Actions
+extension RecipeViewController {
     @IBAction func getDirections(_ sender: UIButton) {
         if favorite {
             guard let url = favoriteRecipe?.sourceUrl else {
@@ -91,46 +134,9 @@ class RecipeViewController: UIViewController {
             FavoriteRecipe.save(recipe, listIngredient)
         }
     }
-
-    func searchRecipe(_ recipeID : String) {
-        recipeService.getRecipe(recipeID) { (error, recipe) in
-            guard error == nil else {
-                guard let error = error else {
-                    return
-                }
-                self.showAlert(title: Constant.titleAlert, message: error)
-                return
-            }
-            self.recipe = recipe
-            self.displayRecipe()
-            self.tableView.reloadData()
-        }
-    }
-
-    func displayRecipe(){
-        recipeView.recipe = recipe
-
-        guard let ingredientLine = recipe?.ingredientLines else {
-            return
-        }
-        self.preparation = ingredientLine
-    }
-
-    func displayFavorite() {
-        recipeView.favoriteRecipe = favoriteRecipe
-
-        guard let ingredients = favoriteRecipe?.ingredients?.allObjects as? [Ingredient] else {
-            return
-        }
-        ingredients.forEach { element in
-            guard let name = element.name else {
-                return
-            }
-            preparation.append(name)
-        }
-    }
 }
 
+// MARK: - TableView Management DataSource
 extension RecipeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

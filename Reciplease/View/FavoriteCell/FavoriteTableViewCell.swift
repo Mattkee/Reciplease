@@ -8,22 +8,19 @@
 
 import UIKit
 
+// MARK: - Favorite Cell
 class FavoriteTableViewCell: UITableViewCell {
-
+    // MARK: - Properties
     var link : FavoriteTableViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 20
         setupRating(ratingStackView, &ratingStar)
+        addFavoriteButton.setImage(#imageLiteral(resourceName: "favorite") , for: .normal)
         // Initialization code
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
+    // MARK: - Outlets
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -31,11 +28,8 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var addFavoriteButton: UIButton!
     @IBOutlet var ratingStar: [UIImageView]!
-    
-    @IBAction func addRemoteFavorite(_ sender: UIButton) {
-        link?.removeFavorite(self)
-    }
-    
+
+    // MARK: - favoriteRecipe object allow to display cell data
     var favoriteRecipe : FavoriteRecipe! {
         didSet {
             self.recipeTitle.text = favoriteRecipe.name
@@ -52,5 +46,12 @@ class FavoriteTableViewCell: UITableViewCell {
             }
             ratingDisplay(rating, ratingStar)
         }
+    }
+}
+
+// MARK: - Action
+extension FavoriteTableViewCell {
+    @IBAction func addRemoteFavorite(_ sender: UIButton) {
+        link?.removeFavorite(self)
     }
 }

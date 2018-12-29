@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Decodable object
 struct SearchRecipe : Decodable {
     let matches : [Matches]
     

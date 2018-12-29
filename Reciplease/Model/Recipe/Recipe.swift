@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Decodable object
 struct Recipe : Decodable {
 
     let totalTime : String

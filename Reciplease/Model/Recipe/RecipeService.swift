@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 class RecipeService {
+    // MARK: - Properties
     private var searchRecipeAPI = SearchRecipeAPI()
     private var recipeAPI = RecipeAPI()
     private var router : Router<SearchRecipeAPI, SearchRecipe>
@@ -19,8 +20,11 @@ class RecipeService {
         self.router = router
         self.recipeRouter = recipeRouter
     }
+}
 
-    func addParameters() -> [(String, Any)] {
+// MARK: - Calculs
+extension RecipeService {
+    private func addParameters() -> [(String, Any)] {
         var parameters = [(String, Any)]()
         let cookingParameters = Constant.cookingParameters
         let dietsParameters = Constant.dietsParameters

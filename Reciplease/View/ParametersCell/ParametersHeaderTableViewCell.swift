@@ -8,8 +8,10 @@
 
 import UIKit
 
+// MARK: - Parameters Cell header
 class ParametersHeaderTableViewCell: UITableViewCell {
 
+    // MARK: - Outlets
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
@@ -19,11 +21,7 @@ class ParametersHeaderTableViewCell: UITableViewCell {
         self.layer.cornerRadius = 10
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-
+    // MARK: - Method
     func headerSetupCell(image: UIImage, label: String) {
         headerImage.image = image
         headerLabel.text = label

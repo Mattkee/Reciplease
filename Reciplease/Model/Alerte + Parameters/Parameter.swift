@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Parameters
 struct Parameter {
     var isExpanded: Bool
     let title: String

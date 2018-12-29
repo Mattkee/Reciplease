@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+//this class allow to router use alamofire request.
 class AlamofireRequest {
     func request(url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         Alamofire.request(url).responseJSON { responseData in

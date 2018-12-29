@@ -9,7 +9,9 @@
 import Foundation
 import CoreData
 
+//CoreData Object
 class FavoriteRecipe: NSManagedObject {
+    //FavoriteRecipes stored in coreData object.
     static var all: [FavoriteRecipe] {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -17,11 +19,13 @@ class FavoriteRecipe: NSManagedObject {
         return recipe
     }
 
+    //this method deletes all data for object.
     static func deleteAll() {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: FavoriteRecipe.fetchRequest())
         let _ = try? AppDelegate.viewContext.execute(deleteRequest)
     }
 
+    //this method allow to recover data contains name.
     static func fetch(_ name: String) -> [FavoriteRecipe] {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", name)
@@ -29,7 +33,7 @@ class FavoriteRecipe: NSManagedObject {
         guard let recipe = try? AppDelegate.viewContext.fetch(request) else { return [] }
         return recipe
     }
-
+    //this method allow to save data in coreData object
     static func save(_ recipe: Recipe, _ ingredientsDetail: String) {
         let favoriteRecipe = FavoriteRecipe(context: AppDelegate.viewContext)
         favoriteRecipe.name = recipe.name
@@ -53,7 +57,7 @@ class FavoriteRecipe: NSManagedObject {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
-
+    //this method allow to remove data in coreData object
     static func remove(_ id: String) {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)

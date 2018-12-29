@@ -7,8 +7,10 @@
 //
 import UIKit
 
+// MARK: - SearchResult Cell
 class SearchResultTableViewCell: UITableViewCell {
-
+    
+    // MARK: - Properties
     var link : RecipeListTableViewController?
     var isFavorite = false
 
@@ -19,11 +21,7 @@ class SearchResultTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-
+    // MARK: - Outlets
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -32,15 +30,8 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var addFavoriteButton: UIButton!
     @IBOutlet weak var favoriteActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var ratingStar: [UIImageView]!
-    
-    @IBAction func addRemoteFavorite(_ sender: UIButton) {
-        favoriteActivityIndicator.color = .black
-        favoriteActivityIndicator.isHidden = false
-        favoriteActivityIndicator.startAnimating()
-        addFavoriteButton.isHidden = true
-        link?.addRemoveFavorite(self)
-    }
 
+    // MARK: - SearchRecipe object allow to display cell data
     var searchRecipe : SearchRecipe.Matches! {
         didSet {
             self.recipeTitle.text = searchRecipe.recipeName
@@ -54,6 +45,21 @@ class SearchResultTableViewCell: UITableViewCell {
             ratingDisplay(String(searchRecipe.rating), ratingStar)
         }
     }
+}
+
+// MARK: - Action
+extension SearchResultTableViewCell {
+    @IBAction func addRemoteFavorite(_ sender: UIButton) {
+        favoriteActivityIndicator.color = .black
+        favoriteActivityIndicator.isHidden = false
+        favoriteActivityIndicator.startAnimating()
+        addFavoriteButton.isHidden = true
+        link?.addRemoveFavorite(self)
+    }
+}
+
+// MARK: Method
+extension SearchResultTableViewCell {
     func favorite(_ isFavorite: Bool) {
         self.isFavorite = isFavorite
         addFavoriteButton.setImage(isFavorite ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "add-favorite"), for: .normal)

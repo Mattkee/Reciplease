@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Currency API from yummly recipe
 struct RecipeAPI: EndPointType {
     
     var recipeID = ""

@@ -17,23 +17,19 @@ class IngredientViewController: UIViewController {
         ingredientTableView.reloadData()
         // Do any additional setup after loading the view.
     }
-
+    // MARK: - Outlets
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
     @IBOutlet weak var buttonform: UIButton!
-    
-    @IBAction func addButton(_ sender: UIButton) {
-        addText()
-    }
-    @IBAction func clearButton(_ sender: UIButton) {
-        clear()
-    }
+}
 
+// MARK: - Methods
+extension IngredientViewController {
     func clear() {
         Constant.ingredients = [String]()
         ingredientTableView.reloadData()
     }
-
+    
     func ingredienttext(_ text: String) -> [String] {
         var list = text.components(separatedBy: ", ")
         list.forEach { element in
@@ -45,7 +41,7 @@ class IngredientViewController: UIViewController {
         }
         return list
     }
-
+    
     func addText() {
         guard let text = searchTextField.text else {
             return
@@ -64,6 +60,17 @@ class IngredientViewController: UIViewController {
     }
 }
 
+// MARK: - Actions
+extension IngredientViewController {
+    @IBAction func addButton(_ sender: UIButton) {
+        addText()
+    }
+    @IBAction func clearButton(_ sender: UIButton) {
+        clear()
+    }
+}
+
+// MARK: - Table View dataSource Managements
 extension IngredientViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -80,7 +87,7 @@ extension IngredientViewController: UITableViewDataSource {
         return cell
     }
 }
-
+// MARK: - Table View dataSource Managements
 extension IngredientViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

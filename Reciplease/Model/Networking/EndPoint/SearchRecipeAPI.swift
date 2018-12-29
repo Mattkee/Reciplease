@@ -8,10 +8,9 @@
 
 import Foundation
 
-// MARK: - Currency API from Fixer.io
+// MARK: - Currency API from yummly
 struct SearchRecipeAPI: EndPointType {
 
-//    var bodyText = ""
     var parameters: Parameters = [("_app_id", Constant.yummlyAPIID), ("_app_key", Constant.yummlyAPIKey)]
 
     var baseURL: URL {
@@ -25,9 +24,6 @@ struct SearchRecipeAPI: EndPointType {
     var httpMethod: HTTPMethod = .get
     
     var task: HTTPTask {
-//        let q = bodyText
-//        var allParameters = parameters
-//        allParameters.append(("q", q))
         return .requestParameters(bodyParameters: nil, urlParameters: parameters)
     }
 }

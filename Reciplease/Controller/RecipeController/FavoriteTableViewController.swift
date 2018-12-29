@@ -9,10 +9,10 @@
 import UIKit
 
 class FavoriteTableViewController: UITableViewController {
-
+    // MARK: - Properties
     var favoriteRecipe = FavoriteRecipe.all
     var displayAlertDelegate: DisplayAlert?
-    
+    // MARK: - Outlets
     @IBOutlet var recipeListTableView: UITableView!
     @IBOutlet weak var favoriteSearchBar: UISearchBar!
 
@@ -25,15 +25,31 @@ class FavoriteTableViewController: UITableViewController {
         self.favoriteRecipe = FavoriteRecipe.all
         recipeListTableView.reloadData()
     }
+    // MARK: - Method
+    func removeFavorite(_ cell: UITableViewCell) {
+        guard let indexPath = recipeListTableView.indexPath(for: cell) else {
+            return
+        }
+        guard let recipeID = favoriteRecipe[indexPath.row].id else {
+            return
+        }
+        FavoriteRecipe.remove(recipeID)
+        favoriteRecipe = FavoriteRecipe.all
+        recipeListTableView.reloadData()
+    }
+}
+
+// MARK: - TableView Management
+extension FavoriteTableViewController {
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return favoriteRecipe.count
     }
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Add some favorite in the list"
@@ -42,33 +58,45 @@ class FavoriteTableViewController: UITableViewController {
         label.textColor = .darkGray
         return label
     }
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return favoriteRecipe.isEmpty ? 200 : 0
     }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteRecipe", for: indexPath) as? FavoriteTableViewCell else {
             return UITableViewCell()
         }
         cell.favoriteRecipe = favoriteRecipe[indexPath.row]
-
-        var isFavorite : Bool {
-            if let recipe = favoriteRecipe[indexPath.row].id {
-                let favorite = FavoriteRecipe.all.contains(where: { $0.id == recipe })
-                return favorite
-            } else {
-                return false
-            }
-        }
         cell.link = self
         cell.addFavoriteButton.tag = indexPath.row
-        cell.addFavoriteButton.setImage(isFavorite ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "add-favorite"), for: .normal)
+        
         return cell
     }
-    
-    // MARK: - Navigation
+}
+
+// MARK: - SearchBar Management
+extension FavoriteTableViewController:  UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            favoriteRecipe = FavoriteRecipe.all
+            recipeListTableView.reloadData()
+        } else {
+            favoriteRecipe = FavoriteRecipe.fetch(searchText)
+            recipeListTableView.reloadData()
+        }
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        favoriteRecipe = FavoriteRecipe.all
+        recipeListTableView.reloadData()
+    }
+}
+
+// MARK: - Navigation
+extension FavoriteTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-
+        
         switch(segue.identifier) {
         case "favoriteRecipe":
             guard let recipeViewController = segue.destination as? RecipeViewController else {
@@ -87,32 +115,5 @@ class FavoriteTableViewController: UITableViewController {
         default :
             print("error")
         }
-    }
-    func removeFavorite(_ cell: UITableViewCell) {
-        guard let indexPath = recipeListTableView.indexPath(for: cell) else {
-            return
-        }
-        guard let recipeID = favoriteRecipe[indexPath.row].id else {
-            return
-        }
-        FavoriteRecipe.remove(recipeID)
-        favoriteRecipe = FavoriteRecipe.all
-        recipeListTableView.reloadData()
-    }
-}
-
-extension FavoriteTableViewController:  UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == "" {
-            favoriteRecipe = FavoriteRecipe.all
-            recipeListTableView.reloadData()
-        } else {
-            favoriteRecipe = FavoriteRecipe.fetch(searchText)
-            recipeListTableView.reloadData()
-        }
-    }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        favoriteRecipe = FavoriteRecipe.all
-        recipeListTableView.reloadData()
     }
 }

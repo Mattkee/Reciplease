@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Alerts
 protocol DisplayAlert {
     func showAlert(title: String, message: String)
 }
