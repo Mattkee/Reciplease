@@ -12,7 +12,9 @@ class IngredientViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buttonform.layer.cornerRadius = 10
+        buttonform.layer.cornerRadius = 20
+        addButtonForm.layer.cornerRadius = 20
+        clearButtonForm.layer.cornerRadius = 20
         ingredientTableView.dataSource = self
         ingredientTableView.reloadData()
         // Do any additional setup after loading the view.
@@ -21,6 +23,9 @@ class IngredientViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
     @IBOutlet weak var buttonform: UIButton!
+    @IBOutlet weak var addButtonForm: UIButton!
+    @IBOutlet weak var clearButtonForm: UIButton!
+    
 }
 
 // MARK: - Methods
@@ -62,6 +67,7 @@ extension IngredientViewController {
 
 // MARK: - Actions
 extension IngredientViewController {
+    @IBAction func unwindToIngredient(segue:UIStoryboardSegue) {}
     @IBAction func addButton(_ sender: UIButton) {
         addText()
     }

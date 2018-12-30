@@ -15,7 +15,10 @@ class FavoriteTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 20
+        self.layer.cornerRadius = 30
+        self.layer.masksToBounds = true
+        self.blurView.layer.cornerRadius = 30
+        self.blurView.layer.masksToBounds = true
         setupRating(ratingStackView, &ratingStar)
         addFavoriteButton.setImage(#imageLiteral(resourceName: "favorite") , for: .normal)
         // Initialization code
@@ -24,6 +27,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var addFavoriteButton: UIButton!

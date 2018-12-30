@@ -17,23 +17,13 @@ class ParametersViewController: UIViewController {
     var twoDimensionalArray = [Parameter]()
     // MARK: - Outlets
     @IBOutlet var parametersPopup: UITableView!
-    @IBOutlet weak var buttonSave: UIButton!
-
-    // MARK: - Action
-    @IBAction func saveButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    @IBAction func closePopUp(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         parametersPopup.delegate = self
         parametersPopup.dataSource = self
 
-        buttonSave.layer.cornerRadius = 10
-        parametersPopup.layer.cornerRadius = 10
+        parametersPopup.layer.cornerRadius = 20
         parametersPopup.layer.masksToBounds = true
         
         updateParametersList()
