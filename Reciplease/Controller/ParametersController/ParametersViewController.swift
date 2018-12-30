@@ -85,7 +85,21 @@ extension ParametersViewController {
             Constant.alergiesParameters.remove(at: index)
         }
     }
-    
+
+    func searchParametersInConstant(_ name: String) -> Bool {
+        var isParameter = false
+        if Constant.alergiesParameters.contains(where: {$0 == name}) {
+            isParameter = true
+        }
+        if Constant.dietsParameters.contains(where: {$0 == name}) {
+            isParameter = true
+        }
+        if Constant.cookingParameters.contains(where: {$0 == name}) {
+            isParameter = true
+        }
+        return isParameter
+    }
+
     @objc func handleExpandClose(_ button: UIButton) {
         let section = button.tag
         
@@ -124,7 +138,8 @@ extension ParametersViewController: UITableViewDataSource, UITableViewDelegate {
         cell.cellListSetup(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
         
         let checkmark = UITableViewCell.AccessoryType.checkmark
-        if twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected == true {
+        let isParameter = searchParametersInConstant(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+        if isParameter {
             cell.accessoryType = checkmark
         } else {
             cell.accessoryType = UITableViewCell.AccessoryType.none
