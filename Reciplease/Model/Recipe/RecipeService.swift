@@ -26,9 +26,9 @@ class RecipeService {
 extension RecipeService {
     private func addParameters() -> [(String, Any)] {
         var parameters = [(String, Any)]()
-        let cookingParameters = Constant.cookingParameters
-        let dietsParameters = Constant.dietsParameters
-        let alergiesParameters = Constant.alergiesParameters
+        let cookingParameters = ParametersRecording.cookingParameters
+        let dietsParameters = ParametersRecording.dietsParameters
+        let alergiesParameters = ParametersRecording.alergiesParameters
         
         if !cookingParameters.isEmpty {
             cookingParameters.forEach { parameter in

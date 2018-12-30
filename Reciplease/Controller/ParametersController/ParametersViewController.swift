@@ -11,10 +11,9 @@ import UIKit
 class ParametersViewController: UIViewController {
     // MARK: - Properties
     let headerSectionImage : [UIImage] = [#imageLiteral(resourceName: "cookingChoice"),#imageLiteral(resourceName: "diets"),#imageLiteral(resourceName: "allergies")]
-    var cookingChoice = [ListElement]()
-    var diets = [ListElement]()
-    var allergies = [ListElement]()
     var twoDimensionalArray = [Parameter]()
+    let parametersService = ParametersService()
+    
     // MARK: - Outlets
     @IBOutlet var parametersPopup: UITableView!
 
@@ -23,83 +22,10 @@ class ParametersViewController: UIViewController {
         parametersPopup.delegate = self
         parametersPopup.dataSource = self
 
-        parametersPopup.layer.cornerRadius = 20
-        parametersPopup.layer.masksToBounds = true
-        
-        updateParametersList()
-        
-        twoDimensionalArray = [
-            Parameter(isExpanded: false, title: "Cooking Choice", list: cookingChoice),
-            Parameter(isExpanded: false, title: "Diets", list: diets),
-            Parameter(isExpanded: false, title: "Allergies", list: allergies)
-        ]
+        parametersService.updateParametersList()
+        twoDimensionalArray = parametersService.twoDimensionalArray
     }
-}
-// MARK: - Methods
-extension ParametersViewController {
-    func updateParametersList() {
-        addListElement(Constant.cookingChoice) { listElement in
-            self.cookingChoice = listElement
-        }
-        addListElement(Constant.diets) { listElement in
-            self.diets = listElement
-        }
-        addListElement(Constant.alergies) { listElement in
-            self.allergies = listElement
-        }
-    }
-
-    func addListElement(_ list: [String], callback: @escaping ([ListElement]) -> Void) {
-        var listElement = [ListElement]()
-        list.forEach { element in
-            listElement.append(ListElement(name: element, isSelected: false))
-        }
-        callback(listElement)
-    }
-
-    func addParameters(_ section: Int, _ element: String) {
-        if section == 0 {
-            Constant.cookingParameters.append(element)
-        } else if section == 1 {
-            Constant.dietsParameters.append(element)
-        } else {
-            Constant.alergiesParameters.append(element)
-        }
-    }
-    
-    func removeParameters(_ section: Int, _ element: String) {
-        if section == 0 {
-            guard let index = Constant.cookingParameters.firstIndex(of: element) else {
-                return
-            }
-            Constant.cookingParameters.remove(at: index)
-        } else if section == 1 {
-            guard let index = Constant.dietsParameters.firstIndex(of: element) else {
-                return
-            }
-            Constant.dietsParameters.remove(at: index)
-        } else {
-            guard let index = Constant.alergiesParameters.firstIndex(of: element) else {
-                return
-            }
-            Constant.alergiesParameters.remove(at: index)
-        }
-    }
-
-    func searchParametersInConstant(_ name: String) -> Bool {
-        var isParameter = false
-        if Constant.alergiesParameters.contains(where: {$0 == name}) {
-            isParameter = true
-        }
-        if Constant.dietsParameters.contains(where: {$0 == name}) {
-            isParameter = true
-        }
-        if Constant.cookingParameters.contains(where: {$0 == name}) {
-            isParameter = true
-        }
-        return isParameter
-    }
-
+    // MARK: - Method
     @objc func handleExpandClose(_ button: UIButton) {
         let section = button.tag
         
@@ -138,9 +64,11 @@ extension ParametersViewController: UITableViewDataSource, UITableViewDelegate {
         cell.cellListSetup(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
         
         let checkmark = UITableViewCell.AccessoryType.checkmark
-        let isParameter = searchParametersInConstant(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+        let isParameter = parametersService.searchParametersInConstant(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+
         if isParameter {
             cell.accessoryType = checkmark
+            twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = true
         } else {
             cell.accessoryType = UITableViewCell.AccessoryType.none
         }
@@ -148,13 +76,14 @@ extension ParametersViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected == false {
+        let selected = twoDimensionalArray[indexPath.section].list[indexPath.row]
+        if selected.isSelected == false {
             twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = true
-            addParameters(indexPath.section, twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+            parametersService.addParameters(indexPath.section, selected.name)
             tableView.reloadData()
         } else {
             twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = false
-            removeParameters(indexPath.section, twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+            parametersService.removeParameters(indexPath.section, selected.name)
             tableView.reloadData()
         }
     }
