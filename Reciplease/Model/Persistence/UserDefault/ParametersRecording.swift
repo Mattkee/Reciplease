@@ -9,12 +9,13 @@
 import Foundation
 
 class ParametersRecording {
+    // MARK: - Keys for UserDefault object
     private struct Keys {
         static let cookingParameters = "cookingParameters"
         static let dietsParameters = "dietsParameters"
         static let alergiesParameters = "alergiesParameters"
     }
-
+    // MARK: - Chosen parameters
     static var cookingParameters : [String] {
         get {
             guard let cooking = UserDefaults.standard.object(forKey: Keys.cookingParameters) as? [String] else {

@@ -171,6 +171,15 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		AF29DF9F21D97C2F0017971E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AFB4B6EC21D5584B0069A606 /* CoreData */,
+				AF29DF9E21D9769F0017971E /* UserDefault */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		AF4B47B721962A7D0031FFCE /* Encoding */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,8 +291,7 @@
 		AF6DBBE1216B4D0F00E9023F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AFB4B6EC21D5584B0069A606 /* CoreData */,
-				AF29DF9E21D9769F0017971E /* UserDefault */,
+				AF29DF9F21D97C2F0017971E /* Persistence */,
 				AF4B47BA21962AB80031FFCE /* Networking */,
 				AFDE39BD21D643FD002AAEAB /* Recipe */,
 				AFD9601121D95C1900CF34FE /* Parameters */,

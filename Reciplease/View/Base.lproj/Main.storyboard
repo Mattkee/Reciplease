@@ -415,6 +415,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="30" sectionFooterHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VZO-JD-OdQ">
                                 <rect key="frame" x="10" y="0.0" width="355" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdH-lH-Tew">
+                                    <rect key="frame" x="0.0" y="130" width="355" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.17043184519999999" green="0.59216968380000001" blue="0.78520947689999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <state key="normal" title="Clear Parameters">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clearParameters:" destination="F8Q-Cg-vnr" eventType="touchUpInside" id="6UH-3y-MbY"/>
+                                    </connections>
+                                </button>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell1" rowHeight="50" id="y3M-fG-2lb" customClass="ParametersHeaderTableViewCell" customModule="Reciplease" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="30" width="355" height="50"/>
@@ -431,13 +443,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQD-tO-EHD">
-                                                    <rect key="frame" x="55" y="14.5" width="275" height="21"/>
+                                                    <rect key="frame" x="55" y="14.5" width="295" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jy-Rx-qaf">
-                                                    <rect key="frame" x="290" y="10" width="25" height="29.5"/>
+                                                    <rect key="frame" x="310" y="10" width="25" height="30"/>
                                                     <state key="normal" image="add-image"/>
                                                 </button>
                                             </subviews>
@@ -467,10 +479,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Ue-ll-GjZ">
-                                                    <rect key="frame" x="15" y="5" width="305" height="39.5"/>
+                                                    <rect key="frame" x="15" y="5" width="325" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orR-e1-nJb">
-                                                            <rect key="frame" x="0.0" y="9.5" width="305" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="10" width="325" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -515,6 +527,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="clearButton" destination="cdH-lH-Tew" id="B8k-tG-1hX"/>
                         <outlet property="parametersPopup" destination="VZO-JD-OdQ" id="aIx-V0-3LY"/>
                     </connections>
                 </viewController>

@@ -16,11 +16,15 @@ class ParametersViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet var parametersPopup: UITableView!
-
+    @IBOutlet weak var clearButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         parametersPopup.delegate = self
         parametersPopup.dataSource = self
+
+        clearButton.layer.cornerRadius = 20
+        clearButton.layer.masksToBounds = true
 
         parametersService.updateParametersList()
         twoDimensionalArray = parametersService.twoDimensionalArray
@@ -33,6 +37,10 @@ class ParametersViewController: UIViewController {
         twoDimensionalArray[section].isExpanded = !isExpanded
         
         parametersPopup.reloadData()
+    }
+    // MARK: - Action
+    @IBAction func clearParameters(_ sender: UIButton) {
+        parametersService.clearParameters()
     }
 }
 
