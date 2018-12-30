@@ -9,6 +9,16 @@
 import UIKit
 
 class IngredientViewController: UIViewController {
+    // MARK: - Properties
+    let ingredientService = IngredientService()
+    var text : String {
+        get {
+            guard let searchText = searchTextField.text else {
+                return ""
+            }
+            return searchText
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,43 +35,11 @@ class IngredientViewController: UIViewController {
     @IBOutlet weak var buttonform: UIButton!
     @IBOutlet weak var addButtonForm: UIButton!
     @IBOutlet weak var clearButtonForm: UIButton!
-    
-}
-
-// MARK: - Methods
-extension IngredientViewController {
-    func clear() {
-        Constant.ingredients = [String]()
-        ingredientTableView.reloadData()
-    }
-    
-    func ingredienttext(_ text: String) -> [String] {
-        var list = text.components(separatedBy: ", ")
-        list.forEach { element in
-            if element.contains(",") {
-                let test = element.components(separatedBy: ",")
-                list.append(contentsOf: test)
-                list.removeAll(where: {$0 == element})
-            }
-        }
-        return list
-    }
-    
+    // MARK: Methods
     func addText() {
-        guard let text = searchTextField.text else {
-            return
-        }
-        if text.contains(",") {
-            let finalTest = ingredienttext(text)
-            Constant.ingredients.append(contentsOf: finalTest)
-        } else {
-            Constant.ingredients.append(text)
-        }
+        ingredientService.addText(self.text)
         ingredientTableView.reloadData()
         self.searchTextField.text?.removeAll()
-    }
-    func removeIngredient(at index: Int) {
-        Constant.ingredients.remove(at: index)
     }
 }
 
@@ -72,7 +50,8 @@ extension IngredientViewController {
         addText()
     }
     @IBAction func clearButton(_ sender: UIButton) {
-        clear()
+        ingredientService.clear()
+        ingredientTableView.reloadData()
     }
 }
 
@@ -97,7 +76,7 @@ extension IngredientViewController: UITableViewDataSource {
 extension IngredientViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            removeIngredient(at: indexPath.row)
+            ingredientService.removeIngredient(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

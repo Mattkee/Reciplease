@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF242D6A2197947800564FEF /* AlamofireRequestFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF242D692197947800564FEF /* AlamofireRequestFake.swift */; };
 		AF29DF9D21D96B9B0017971E /* ParametersRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF29DF9C21D96B9B0017971E /* ParametersRecording.swift */; };
+		AF29DFA121D981910017971E /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF29DFA021D981910017971E /* IngredientService.swift */; };
 		AF41FA5F21B8403800120ECA /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF41FA5E21B8403800120ECA /* Parameter.swift */; };
 		AF449AFF219DB5480073B7F7 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */; };
 		AF4B47A921962A4B0031FFCE /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B47A321962A4A0031FFCE /* HTTPTask.swift */; };
@@ -74,6 +75,7 @@
 		AE27F32DED38BCF34F38BD3C /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF242D692197947800564FEF /* AlamofireRequestFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestFake.swift; sourceTree = "<group>"; };
 		AF29DF9C21D96B9B0017971E /* ParametersRecording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersRecording.swift; sourceTree = "<group>"; };
+		AF29DFA021D981910017971E /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		AF41FA5E21B8403800120ECA /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		AF4B47A321962A4A0031FFCE /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
@@ -180,6 +182,22 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		AF29DFA221D986E90017971E /* Ingredient */ = {
+			isa = PBXGroup;
+			children = (
+				AF29DFA021D981910017971E /* IngredientService.swift */,
+			);
+			path = Ingredient;
+			sourceTree = "<group>";
+		};
+		AF29DFA321D9871D0017971E /* IngredientController */ = {
+			isa = PBXGroup;
+			children = (
+				AFBF6AB42180B80B00C424E8 /* IngredientViewController.swift */,
+			);
+			path = IngredientController;
+			sourceTree = "<group>";
+		};
 		AF4B47B721962A7D0031FFCE /* Encoding */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +276,7 @@
 		AF6DBBDE216B4C6400E9023F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AF29DFA321D9871D0017971E /* IngredientController */,
 				AFDE39BF21D6459C002AAEAB /* RecipeController */,
 				AFDE39C021D645AB002AAEAB /* ParametersController */,
 			);
@@ -294,6 +313,7 @@
 				AF29DF9F21D97C2F0017971E /* Persistence */,
 				AF4B47BA21962AB80031FFCE /* Networking */,
 				AFDE39BD21D643FD002AAEAB /* Recipe */,
+				AF29DFA221D986E90017971E /* Ingredient */,
 				AFD9601121D95C1900CF34FE /* Parameters */,
 				AF29DF9B21D9603E0017971E /* Alert */,
 			);
@@ -416,7 +436,6 @@
 		AFDE39BF21D6459C002AAEAB /* RecipeController */ = {
 			isa = PBXGroup;
 			children = (
-				AFBF6AB42180B80B00C424E8 /* IngredientViewController.swift */,
 				AFFAD3DA219AEC2C00876788 /* SearchRecipeTableViewController.swift */,
 				AF8D183C21A70BF8003B82B4 /* FavoriteTableViewController.swift */,
 				AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */,
@@ -613,6 +632,7 @@
 				AF4B47A921962A4B0031FFCE /* HTTPTask.swift in Sources */,
 				AF5E4B8F21C784270016EA9D /* ParametersHeaderTableViewCell.swift in Sources */,
 				AFDE90C721C3C5D600F53EB2 /* Ingredient.swift in Sources */,
+				AF29DFA121D981910017971E /* IngredientService.swift in Sources */,
 				AFDE39C421D6584B002AAEAB /* RecipeView.swift in Sources */,
 				AFD1CC622194E6D8002526D5 /* Constant.swift in Sources */,
 				AF8D183D21A70BF8003B82B4 /* FavoriteTableViewController.swift in Sources */,
