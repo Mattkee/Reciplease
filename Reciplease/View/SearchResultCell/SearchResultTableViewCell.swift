@@ -11,7 +11,7 @@ import UIKit
 class SearchResultTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    var link : RecipeListTableViewController?
+    var link : SearchRecipeTableViewController?
     var isFavorite = false
 
     override func awakeFromNib() {

@@ -55,7 +55,7 @@
         <!--Reciplease-->
         <scene sceneID="UFo-0O-dtD">
             <objects>
-                <tableViewController id="TLt-Q7-OO6" customClass="RecipeListTableViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="TLt-Q7-OO6" customClass="SearchRecipeTableViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fkT-Xh-jp7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,9 +72,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                         </imageView>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4rM-hJ-x8m">
-                                            <rect key="frame" x="0.0" y="3.5" width="375" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="4" width="375" height="71"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vqJ-wF-XAJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rod-Rw-SVw">
@@ -720,9 +720,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                         </imageView>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZx-uj-Dc9">
-                                            <rect key="frame" x="0.0" y="3.5" width="375" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="4" width="375" height="71"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="F5J-1I-3vD">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="PUY-rh-REy">

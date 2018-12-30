@@ -1,5 +1,5 @@
 //
-//  RecipeListTableViewController.swift
+//  SearchRecipeTableViewController.swift
 //  Reciplease
 //
 //  Created by Lei et Matthieu on 13/11/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipeListTableViewController: UITableViewController {
+class SearchRecipeTableViewController: UITableViewController {
     // MARK: - Properties
     let recipeService = RecipeService()
     var searchResult : SearchRecipe?
@@ -29,7 +29,7 @@ class RecipeListTableViewController: UITableViewController {
 }
 
 // MARK: - Methods
-extension RecipeListTableViewController {
+extension SearchRecipeTableViewController {
     private func searchRecipe() {
         recipeService.getSearchRecipe { (error, recipes) in
             guard error == nil else {
@@ -81,7 +81,7 @@ extension RecipeListTableViewController {
 }
 
 // MARK: - Table view data source
-extension RecipeListTableViewController {
+extension SearchRecipeTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -127,7 +127,7 @@ extension RecipeListTableViewController {
 }
 
 // MARK: - Navigation
-extension RecipeListTableViewController {
+extension SearchRecipeTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier) {
