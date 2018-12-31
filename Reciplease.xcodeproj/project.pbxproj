@@ -76,6 +76,7 @@
 		AF242D692197947800564FEF /* AlamofireRequestFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestFake.swift; sourceTree = "<group>"; };
 		AF29DF9C21D96B9B0017971E /* ParametersRecording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersRecording.swift; sourceTree = "<group>"; };
 		AF29DFA021D981910017971E /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
+		AF29DFA621D997F60017971E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AF41FA5E21B8403800120ECA /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
 		AF449AFE219DB5480073B7F7 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		AF4B47A321962A4A0031FFCE /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				AF6DBBC7216B4C4500E9023F /* Products */,
 				BAA476F3857E9A86638F9B1C /* Pods */,
 				2AA42BAEA2E8B09EDBFA1F31 /* Frameworks */,
+				AF29DFA621D997F60017971E /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
