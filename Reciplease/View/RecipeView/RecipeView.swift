@@ -36,7 +36,7 @@ class RecipeView: UIView {
             if let image = favoriteRecipe.image {
                 self.recipeImage.image = UIImage.recipeImage(image)
             } else {
-                self.recipeImage.image = UIImage(imageLiteralResourceName: "breakfast")
+                self.recipeImage.image = UIImage(imageLiteralResourceName: "unknownRecipe")
             }
             guard let rating = favoriteRecipe.rating else {
                 return

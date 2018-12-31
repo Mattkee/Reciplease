@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "black-small-star.png",
+      "filename" : "black star.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "black-small-star@2x.png",
+      "filename" : "black star@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "black-small-star@3x.png",
+      "filename" : "black star@3x.png",
       "scale" : "3x"
     }
   ],

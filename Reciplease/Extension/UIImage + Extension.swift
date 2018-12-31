@@ -15,15 +15,14 @@ extension UIImage {
         let finalUrl = String(url.dropLast(2) + "300")
         
         guard let imageUrl = URL(string: finalUrl) else {
-            return UIImage(imageLiteralResourceName: "breakfast")
+            return UIImage(imageLiteralResourceName: "unknownRecipe")
         }
         guard let imageData = try? Data(contentsOf: imageUrl) else {
-            return UIImage(imageLiteralResourceName: "breakfast")
+            return UIImage(imageLiteralResourceName: "unknownRecipe")
         }
         guard let image = UIImage(data: imageData) else {
-            return UIImage(imageLiteralResourceName: "breakfast")
+            return UIImage(imageLiteralResourceName: "unknownRecipe")
         }
         return image
     }
 }
-
