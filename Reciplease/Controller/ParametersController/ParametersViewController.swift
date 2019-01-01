@@ -41,6 +41,9 @@ class ParametersViewController: UIViewController {
     // MARK: - Action
     @IBAction func clearParameters(_ sender: UIButton) {
         parametersService.clearParameters()
+        parametersService.updateParametersList()
+        twoDimensionalArray = parametersService.twoDimensionalArray
+        parametersPopup.reloadData()
     }
 }
 

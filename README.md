@@ -42,3 +42,51 @@ Pour créer ce tableau nous allons commencer par créer une structure *Parameter
 ```
 Nous pouvons donc ainsi créer un tableau de type *Parameter* appelé **twoDimensionalArray**
 
+````var twoDimensionalArray = [Parameter]()````
+
+Ce tableau va nous permettre de séparer les différentes sections de paramètres de notre tableView
+La variable **isExpanded** nous servira pour afficher ou masquer la liste de paramètres proposé dans chaque catégorie
+
+Ensuite selon les choix de l'utilisateur, ces paramètres seront gérés par le biais de méthodes en utilisant **User Default** grâce à trois variables static correspondant aux trois catégories :
+````
+static var cookingParameters : [String] {
+    get {
+        guard let cooking = UserDefaults.standard.object(forKey: Keys.cookingParameters) as? [String] else {
+            return []
+        }
+        return cooking
+    }
+    set {
+        UserDefaults.standard.set(newValue, forKey: Keys.cookingParameters)
+    }
+}
+
+static var dietsParameters : [String] {
+    get {
+        guard let diets = UserDefaults.standard.object(forKey: Keys.dietsParameters) as? [String] else {
+            return []
+        }
+        return diets
+    }
+    set {
+        UserDefaults.standard.set(newValue, forKey: Keys.dietsParameters)
+    }
+}
+
+static var alergiesParameters : [String] {
+    get {
+        guard let alergies = UserDefaults.standard.object(forKey: Keys.alergiesParameters) as? [String] else {
+            return []
+        }
+        return alergies
+    }
+    set {
+        UserDefaults.standard.set(newValue, forKey: Keys.alergiesParameters)
+    }
+}
+````
+Ensuite une méthode va permettre de supprimer les paramètres précédemment enregistrés pour revenir à zéro.
+
+> Voici une animation présentant ce bonus.
+
+![démonstration du bonus](ImagesReadme/parameters.gif)
