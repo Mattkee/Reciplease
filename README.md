@@ -146,3 +146,47 @@ static func fetch(_ name: String) -> [FavoriteRecipe] {
 
 ![démonstration du bonus](ImagesReadme/searchFavorite.gif)
 
+>> 5. La possibilité de mettre une recette en favori directement sur la page des résultats de la recherche
+
+Ce bonus va permettre à l'utilisateur d'ajouter ou de supprimer une recette des favoris directement sur la page présentant le résultat de la recherche de recettes par ingrédient.
+
+Pour gérer ce bonus, nous allons utiliser une méthode pour définir si la recette fait déjà ou non parti des favoris et le cas échéant ajouter la recette selectionnée à notre objet FavoriteRecipe sauvegardé avec "*CoreData*" ou la supprimer.
+````
+func addRemoveFavorite(_ cell: UITableViewCell) {
+    guard let indexPath = recipeListTableView.indexPath(for: cell) else {
+        return
+    }
+    guard let searchRecipe = searchResult?.matches[indexPath.row] else {
+        return
+    }
+    if FavoriteRecipe.all.contains(where: {$0.id == searchRecipe.id}) {
+        FavoriteRecipe.remove(searchRecipe.id)
+        recipeListTableView.reloadRows(at: [indexPath], with: .fade)
+    } else {
+        saveRecipeToFavorite(indexPath, searchRecipe)
+    }
+}
+````
+si on choisit ajouter la recette, une autre méthode est appelée qui va chercher grace à l'**ID** de la recette les informations nécessaire pour pouvoir enregistre correctement la recette dans la liste des favoris.
+````
+private func saveRecipeToFavorite(_ indexPath: IndexPath, _ searchRecipe: SearchRecipe.Matches) {
+    recipeService.getRecipe(searchRecipe.id) { (error, recipe) in
+        guard error == nil else {
+            guard let error = error else {
+                return
+            }
+            self.showAlert(title: Constant.titleAlert, message: error)
+            return
+        }
+        let listIngredient = searchRecipe.ingredients.joined(separator: ", ")
+        guard let resultRecipe = recipe else {
+            return
+        }
+        FavoriteRecipe.save(resultRecipe, listIngredient)
+        self.recipeListTableView.reloadRows(at: [indexPath], with: .fade)
+    }
+}
+````
+> Voici une animation présentant ce bonus.
+
+![démonstration du bonus](ImagesReadme/addFavorite.gif)

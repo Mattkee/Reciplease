@@ -57,7 +57,6 @@ extension SearchRecipeTableViewController {
             recipeListTableView.reloadRows(at: [indexPath], with: .fade)
         } else {
             saveRecipeToFavorite(indexPath, searchRecipe)
-            
         }
     }
     // Mark: - Network call
