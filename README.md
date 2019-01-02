@@ -47,7 +47,13 @@ Nous pouvons donc ainsi créer un tableau de type *Parameter* appelé **twoDimen
 Ce tableau va nous permettre de séparer les différentes sections de paramètres de notre tableView
 La variable **isExpanded** nous servira pour afficher ou masquer la liste de paramètres proposé dans chaque catégorie
 
-Ensuite selon les choix de l'utilisateur, ces paramètres seront gérés par le biais de méthodes en utilisant **User Default** grâce à trois variables static correspondant aux trois catégories :
+> Voici une animation présentant ce bonus.
+
+![démonstration du bonus](ImagesReadme/parameters.gif)
+
+>> 2. La persistence de données pour les paramètres
+
+Les paramètres choisis par l'utilisateur seront gérés par le biais de méthodes en utilisant **User Default** pour la persistence de données grâce à trois variables static correspondant aux trois catégories :
 ````
 static var cookingParameters : [String] {
     get {
@@ -85,8 +91,58 @@ static var alergiesParameters : [String] {
     }
 }
 ````
-Ensuite une méthode va permettre de supprimer les paramètres précédemment enregistrés pour revenir à zéro.
+Ensuite une méthode va permettre de supprimer les paramètres précédemment enregistrés pour revenir à zéro comme vu sur l'animation précédente.
+````
+func clearParameters() {
+    ParametersRecording.cookingParameters.removeAll()
+    ParametersRecording.dietsParameters.removeAll()
+    ParametersRecording.alergiesParameters.removeAll()
+}
+````
+> >3. La suppression des ingrédients un par un
+
+La suppression des ingrédients se fait de manière globale grâce au bouton **Clear**, mais peut aussi se faire ingrédient par ingrédient
+grâce à une methode du protocole  **UITableViewDelegate** :
+````
+func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+        ingredientService.removeIngredient(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+}
+````
+> Voici une animation présentant ce bonus.
+
+![démonstration du bonus](ImagesReadme/ingredient.gif)
+
+>> 4. La recherche parmi les favoris d'une recette spécifique
+
+Afin de permettre de trouver une recette parmi les favoris plus facilement, l'utilisateur pourra sur la liste de favoris utiliser une searchBar pour chercher une recette grâce au nom d'une recette.
+
+pour ce bonus nous utiliserons une methode du protocole **UISearchBarDelegate** :
+````
+func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText == "" {
+        favoriteRecipe = FavoriteRecipe.all
+        recipeListTableView.reloadData()
+    } else {
+        favoriteRecipe = FavoriteRecipe.fetch(searchText)
+        recipeListTableView.reloadData()
+    }
+}
+````
+Cette méthode va renvoyer vers la méthode *fetch* de notre class **FavoriteRecipe** qui va filtrer les données stockées dans coreData pour ne garder que les données correspondant à la recherche searchBar de l'utilisateur.
+````
+static func fetch(_ name: String) -> [FavoriteRecipe] {
+    let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
+    request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", name)
+    request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    guard let recipe = try? AppDelegate.viewContext.fetch(request) else { return [] }
+    return recipe
+}
+````
 
 > Voici une animation présentant ce bonus.
 
-![démonstration du bonus](ImagesReadme/parameters.gif)
+![démonstration du bonus](ImagesReadme/searchFavorite.gif)
+
