@@ -1,7 +1,7 @@
 #  Projet 10
 ## Les Bonus de Reciplease
 ### L'application Reciplease
-Reciplease est une application de recherches de recettes de cuisine avec des outils indispensables pour chercher par ingrédient et mettre ces recettes en favoris.
+Reciplease est une application de recherches de recettes de cuisine avec des outils indispensables pour chercher par ingrédients et mettre ces recettes en favoris.
 
 **l'application se compose de plusieurs fonctionnalités principales :**
 * le choix des ingrédients pour trouver des recettes correspondantes
@@ -9,12 +9,12 @@ Reciplease est une application de recherches de recettes de cuisine avec des out
 * la visualisation d'une recette précise
 * la mise en favori des recettes choisis
 * la visualisation des recettes mises en favori
-* la persistence de données pour les favoris
+* la persistance de données pour les favoris
 ### Les Bonus
 **Plusieurs fonctionnalités bonus ont été rajoutées à l'application Reciplease :**
 
 > 1. Le choix de paramètres pour la recherche de recettes
-> 2. La persistence de données pour les paramètres
+> 2. La persistance de données pour les paramètres
 > 3. La suppression des ingrédients un par un
 > 4. La recherche parmi les favoris d'une recette spécifique
 > 5. La possibilité de mettre une recette en favori directement sur la page des résultats de la recherche
@@ -23,7 +23,7 @@ Reciplease est une application de recherches de recettes de cuisine avec des out
 
 >> 1.  Le choix de paramètres pour la recherche de recettes
 
-Afin de permettre l'ajout de paramètres pour la recherche de recettes tel que les régimes alimentaires, un type de cuisine ou signaler des alergies, nous allons créer un tableau en deux dimensions, afin de repérer chaque type de paramètres avec sa liste de choix possibles.
+Afin de permettre l'ajout de paramètres pour la recherche de recettes tel que les régimes alimentaires, un type de cuisine ou signaler des allergies, nous allons créer un tableau en deux dimensions, afin de repérer chaque type de paramètres avec sa liste de choix possibles.
 
 ![page des paramètres](ImagesReadme/parameter.png)
 
@@ -47,15 +47,15 @@ Nous pouvons donc ainsi créer un tableau de type *Parameter* appelé **twoDimen
 ````var twoDimensionalArray = [Parameter]()````
 
 Ce tableau va nous permettre de séparer les différentes sections de paramètres de notre tableView
-La variable **isExpanded** nous servira pour afficher ou masquer la liste de paramètres proposé dans chaque catégorie
+La variable **isExpanded** nous servira pour afficher ou masquer la liste de paramètres proposés dans chaque catégorie
 
 > Voici une animation présentant ce bonus.
 
 ![démonstration du bonus](ImagesReadme/parameters.gif)
 
->> 2. La persistence de données pour les paramètres
+>> 2. La persistance de données pour les paramètres
 
-Les paramètres choisis par l'utilisateur seront gérés par le biais de méthodes en utilisant **User Default** pour la persistence de données grâce à trois variables static correspondant aux trois catégories :
+Les paramètres choisis par l'utilisateur seront gérés par le biais de méthodes en utilisant **User Default** pour la persistance de données grâce à trois variables static correspondant aux trois catégories :
 ````
 static var cookingParameters : [String] {
     get {
@@ -104,7 +104,7 @@ func clearParameters() {
 > >3. La suppression des ingrédients un par un
 
 La suppression des ingrédients se fait de manière globale grâce au bouton **Clear**, mais peut aussi se faire ingrédient par ingrédient
-grâce à une methode du protocole  **UITableViewDelegate** :
+grâce à une méthode du protocole  **UITableViewDelegate** :
 
 ![page des ingredients](ImagesReadme/ingredients.png)
 
@@ -126,7 +126,7 @@ Afin de permettre de trouver une recette parmi les favoris plus facilement, l'ut
 
 ![page des favoris](ImagesReadme/favorite.png)
 
-pour ce bonus nous utiliserons une methode du protocole **UISearchBarDelegate** :
+pour ce bonus nous utiliserons une méthode du protocole **UISearchBarDelegate** :
 ````
 func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchText == "" {
@@ -155,11 +155,11 @@ static func fetch(_ name: String) -> [FavoriteRecipe] {
 
 >> 5. La possibilité de mettre une recette en favori directement sur la page des résultats de la recherche
 
-Ce bonus va permettre à l'utilisateur d'ajouter ou de supprimer une recette des favoris directement sur la page présentant le résultat de la recherche de recettes par ingrédient.
+Ce bonus va permettre à l'utilisateur d'ajouter ou de supprimer une recette des favoris directement sur la page présentant le résultat de la recherche de recettes par ingrédients.
 
 ![page des résultats de recherches](ImagesReadme/searchRecipe.png)
 
-Pour gérer ce bonus, nous allons utiliser une méthode pour définir si la recette fait déjà ou non parti des favoris et le cas échéant ajouter la recette selectionnée à notre objet FavoriteRecipe sauvegardé avec "*CoreData*" ou la supprimer.
+Pour gérer ce bonus, nous allons utiliser une méthode pour définir si la recette fait déjà ou non parti des favoris et le cas échéant ajouter la recette sélectionnée à notre objet FavoriteRecipe sauvegardé avec "*CoreData*" ou la supprimer.
 ````
 func addRemoveFavorite(_ cell: UITableViewCell) {
     guard let indexPath = recipeListTableView.indexPath(for: cell) else {
@@ -176,7 +176,7 @@ func addRemoveFavorite(_ cell: UITableViewCell) {
     }
 }
 ````
-si on choisit ajouter la recette, une autre méthode est appelée qui va chercher grace à l'**ID** de la recette les informations nécessaire pour pouvoir enregistre correctement la recette dans la liste des favoris.
+si on choisit ajouter la recette, une autre méthode est appelée qui va chercher grâce à l'**ID** de la recette les informations nécessaire pour pouvoir enregistrer correctement la recette dans la liste des favoris.
 ````
 private func saveRecipeToFavorite(_ indexPath: IndexPath, _ searchRecipe: SearchRecipe.Matches) {
     recipeService.getRecipe(searchRecipe.id) { (error, recipe) in
