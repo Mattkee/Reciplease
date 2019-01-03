@@ -25,6 +25,8 @@ Reciplease est une application de recherches de recettes de cuisine avec des out
 
 Afin de permettre l'ajout de paramètres pour la recherche de recettes tel que les régimes alimentaires, un type de cuisine ou signaler des alergies, nous allons créer un tableau en deux dimensions, afin de repérer chaque type de paramètres avec sa liste de choix possibles.
 
+![page des paramètres](ImagesReadme/parameter.png)
+
 Pour créer ce tableau nous allons commencer par créer une structure *Parameter* qui aura plusieurs propriétés :
 * Une constante de type *String* appelée : **title** qui représentera le titre de la catégorie de paramètre
 * Une variable de type *Bool* appelée : **isExpanded** qui permettra d'afficher/masquer le contenu de la catégorie dans la tableView
@@ -103,6 +105,9 @@ func clearParameters() {
 
 La suppression des ingrédients se fait de manière globale grâce au bouton **Clear**, mais peut aussi se faire ingrédient par ingrédient
 grâce à une methode du protocole  **UITableViewDelegate** :
+
+![page des ingredients](ImagesReadme/ingredients.png)
+
 ````
 func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
@@ -118,6 +123,8 @@ func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.Ed
 >> 4. La recherche parmi les favoris d'une recette spécifique
 
 Afin de permettre de trouver une recette parmi les favoris plus facilement, l'utilisateur pourra sur la liste de favoris utiliser une searchBar pour chercher une recette grâce au nom d'une recette.
+
+![page des favoris](ImagesReadme/favorite.png)
 
 pour ce bonus nous utiliserons une methode du protocole **UISearchBarDelegate** :
 ````
@@ -149,6 +156,8 @@ static func fetch(_ name: String) -> [FavoriteRecipe] {
 >> 5. La possibilité de mettre une recette en favori directement sur la page des résultats de la recherche
 
 Ce bonus va permettre à l'utilisateur d'ajouter ou de supprimer une recette des favoris directement sur la page présentant le résultat de la recherche de recettes par ingrédient.
+
+![page des résultats de recherches](ImagesReadme/searchRecipe.png)
 
 Pour gérer ce bonus, nous allons utiliser une méthode pour définir si la recette fait déjà ou non parti des favoris et le cas échéant ajouter la recette selectionnée à notre objet FavoriteRecipe sauvegardé avec "*CoreData*" ou la supprimer.
 ````
