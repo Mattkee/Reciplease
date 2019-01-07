@@ -10,13 +10,13 @@ import UIKit
 
 class RecipeViewController: UIViewController {
     // MARK: - Properties
-    var recipe: Recipe?
+    private var recipe: Recipe?
     var favoriteRecipe: FavoriteRecipe?
-    let recipeService = RecipeService()
+    private let recipeService = RecipeService()
     var recipeID : String?
     var ingredients = [String]()
-    var preparation = [String]()
-    var displayAlertDelegate: DisplayAlert?
+    private var preparation = [String]()
+    private var displayAlertDelegate: DisplayAlert?
 
     var favorite : Bool {
         if recipeID != nil {
@@ -58,7 +58,7 @@ class RecipeViewController: UIViewController {
 
 // MARK: - Methods
 extension RecipeViewController {
-    func searchRecipe(_ recipeID : String) {
+    private func searchRecipe(_ recipeID : String) {
         recipeService.getRecipe(recipeID) { (error, recipe) in
             guard error == nil else {
                 guard let error = error else {
@@ -73,7 +73,7 @@ extension RecipeViewController {
         }
     }
     
-    func displayRecipe(){
+    private func displayRecipe(){
         recipeView.recipe = recipe
         
         guard let ingredientLine = recipe?.ingredientLines else {
@@ -82,7 +82,7 @@ extension RecipeViewController {
         self.preparation = ingredientLine
     }
     
-    func displayFavorite() {
+    private func displayFavorite() {
         recipeView.favoriteRecipe = favoriteRecipe
         
         guard let ingredients = favoriteRecipe?.ingredients?.allObjects as? [Ingredient] else {

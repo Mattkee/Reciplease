@@ -13,7 +13,7 @@ class SearchRecipeTableViewController: UITableViewController {
     private let recipeService = RecipeService()
     private var searchResult : SearchRecipe?
     private var activityIndicator = false
-    var displayAlertDelegate: DisplayAlert?
+    private var displayAlertDelegate: DisplayAlert?
     // MARK: - Outlets
     @IBOutlet var recipeListTableView: UITableView!
     
