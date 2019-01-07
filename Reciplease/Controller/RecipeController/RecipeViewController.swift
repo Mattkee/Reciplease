@@ -42,6 +42,7 @@ class RecipeViewController: UIViewController {
             self.favoriteRecipe = favorite
             displayFavorite()
         } else {
+            favoriteButton.isSelected = false
             guard let id = recipeID else {
                 return
             }

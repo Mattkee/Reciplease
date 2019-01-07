@@ -10,9 +10,9 @@ import UIKit
 
 class SearchRecipeTableViewController: UITableViewController {
     // MARK: - Properties
-    let recipeService = RecipeService()
-    var searchResult : SearchRecipe?
-    var activityIndicator = false
+    private let recipeService = RecipeService()
+    private var searchResult : SearchRecipe?
+    private var activityIndicator = false
     var displayAlertDelegate: DisplayAlert?
     // MARK: - Outlets
     @IBOutlet var recipeListTableView: UITableView!
