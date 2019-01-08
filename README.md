@@ -30,16 +30,24 @@ Afin de permettre l'ajout de paramètres pour la recherche de recettes tel que l
 Pour créer ce tableau nous allons commencer par créer une structure *Parameter* qui aura plusieurs propriétés :
 * Une constante de type *String* appelée : **title** qui représentera le titre de la catégorie de paramètre
 * Une variable de type *Bool* appelée : **isExpanded** qui permettra d'afficher/masquer le contenu de la catégorie dans la tableView
-* une variable de type *ListElement* appelée : **list** qui renverra à une *struct* elle même composée de deux variables, name et isSelected
+* une variable de type *ListElement* appelée : **list** qui renverra à une *struct* elle même composée de deux variables, element et isSelected
+* la variable *element*, renverra vers une *struct* **decodable** qui servira d'objet pour les données issues d'un fichier json présent dans les supportingsFiles
 ```
     struct Parameter {
         var isExpanded: Bool
         let title: String
         var list: [ListElement]
     }
+    
     struct ListElement {
-        var name: String
+        var element: YummlyParameters
         var isSelected: Bool
+    }
+    
+    struct YummlyParameters: Decodable {
+        var name: String?
+        var shortDescription: String?
+        var searchValue: String
     }
 ```
 Nous pouvons donc ainsi créer un tableau de type *Parameter* appelé **twoDimensionalArray**
