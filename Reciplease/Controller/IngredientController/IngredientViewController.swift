@@ -36,8 +36,8 @@ class IngredientViewController: UIViewController {
     @IBOutlet weak var addButtonForm: UIButton!
     @IBOutlet weak var clearButtonForm: UIButton!
     // MARK: Methods
-    func addText() {
-        ingredientService.addText(self.text)
+    func addIngredient() {
+        ingredientService.addIngredient(self.text)
         ingredientTableView.reloadData()
         self.searchTextField.text?.removeAll()
     }
@@ -47,7 +47,7 @@ class IngredientViewController: UIViewController {
 extension IngredientViewController {
     @IBAction func unwindToIngredient(segue:UIStoryboardSegue) {}
     @IBAction func addButton(_ sender: UIButton) {
-        addText()
+        addIngredient()
     }
     @IBAction func clearButton(_ sender: UIButton) {
         ingredientService.clear()
@@ -89,7 +89,7 @@ extension IngredientViewController : UITextFieldDelegate {
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        addText()
+        addIngredient()
         return true
     }
 }

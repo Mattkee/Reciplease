@@ -16,6 +16,12 @@ struct Parameter {
 }
 
 struct ListElement {
-    var name: String
+    var element: YummlyParameters
     var isSelected: Bool
+}
+
+struct YummlyParameters: Decodable {
+    var name: String?
+    var shortDescription: String?
+    var searchValue: String
 }

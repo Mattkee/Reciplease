@@ -120,9 +120,9 @@ class RecipeServiceTestCase: XCTestCase {
         let fakeResponse = FakeResponse(response: FakeResponseData.responseOK, data: FakeResponseData.recipeCorrectData, error: nil)
         let alamofireRequest = AlamofireRequestFake(fakeResponse: fakeResponse)
         let recipeService = RecipeService(router: Router<SearchRecipeAPI, SearchRecipe>(alamofireRequest: alamofireRequest))
-        Constant.cookingParameters.append("American")
-        Constant.alergiesParameters.append("Gluten")
-        Constant.dietsParameters.append("Vegetarian")
+        ParametersRecording.cookingParameters.append("American")
+        ParametersRecording.alergiesParameters.append("Gluten")
+        ParametersRecording.dietsParameters.append("Vegetarian")
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         recipeService.getSearchRecipe { (error, recipe) in

@@ -13,19 +13,19 @@ class IngredientService {
         Constant.ingredients = [String]()
     }
     
-    func ingredienttext(_ text: String) -> [String] {
+    private func ingredienttext(_ text: String) -> [String] {
         var list = text.components(separatedBy: ", ")
         list.forEach { element in
             if element.contains(",") {
-                let test = element.components(separatedBy: ",")
-                list.append(contentsOf: test)
+                let elementText = element.components(separatedBy: ",")
+                list.append(contentsOf: elementText)
                 list.removeAll(where: {$0 == element})
             }
         }
         return list
     }
     
-    func addText(_ text : String) {
+    func addIngredient(_ text : String) {
         if text.contains(",") {
             let finalTest = ingredienttext(text)
             Constant.ingredients.append(contentsOf: finalTest)

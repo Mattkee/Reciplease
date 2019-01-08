@@ -71,11 +71,13 @@ extension ParametersViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "parameters", for: indexPath) as! ParametersTableViewCell
-        
-        cell.cellListSetup(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+        guard let name = twoDimensionalArray[indexPath.section].list[indexPath.row].element.name ?? twoDimensionalArray[indexPath.section].list[indexPath.row].element.shortDescription else {
+            return UITableViewCell()
+        }
+        cell.cellListSetup(name)
         
         let checkmark = UITableViewCell.AccessoryType.checkmark
-        let isParameter = parametersService.searchParametersInConstant(twoDimensionalArray[indexPath.section].list[indexPath.row].name)
+        let isParameter = parametersService.searchParametersInConstant(twoDimensionalArray[indexPath.section].list[indexPath.row].element.searchValue)
 
         if isParameter {
             cell.accessoryType = checkmark
@@ -90,11 +92,11 @@ extension ParametersViewController: UITableViewDataSource, UITableViewDelegate {
         let selected = twoDimensionalArray[indexPath.section].list[indexPath.row]
         if selected.isSelected == false {
             twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = true
-            parametersService.addParameters(indexPath.section, selected.name)
+            parametersService.addParameters(indexPath.section, selected.element.searchValue)
             tableView.reloadData()
         } else {
             twoDimensionalArray[indexPath.section].list[indexPath.row].isSelected = false
-            parametersService.removeParameters(indexPath.section, selected.name)
+            parametersService.removeParameters(indexPath.section, selected.element.searchValue)
             tableView.reloadData()
         }
     }

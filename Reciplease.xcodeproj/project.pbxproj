@@ -31,6 +31,11 @@
 		AF6DBBD4216B4C4800E9023F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6DBBD3216B4C4800E9023F /* Assets.xcassets */; };
 		AF6DBBD7216B4C4800E9023F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6DBBD5216B4C4800E9023F /* LaunchScreen.storyboard */; };
 		AF6F1E272181C32D00938222 /* RecipeServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F1E262181C32D00938222 /* RecipeServiceTestCase.swift */; };
+		AF7A352521E4B39200887B77 /* Cuisine.json in Resources */ = {isa = PBXBuildFile; fileRef = AF7A352421E4B39200887B77 /* Cuisine.json */; };
+		AF7A352721E4B71300887B77 /* Diet.json in Resources */ = {isa = PBXBuildFile; fileRef = AF7A352621E4B71300887B77 /* Diet.json */; };
+		AF7A352921E4B7C300887B77 /* Allergy.json in Resources */ = {isa = PBXBuildFile; fileRef = AF7A352821E4B7C300887B77 /* Allergy.json */; };
+		AF7A352C21E4D06600887B77 /* IngredientServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7A352B21E4D06600887B77 /* IngredientServiceTestCase.swift */; };
+		AF7A353121E4D80E00887B77 /* ParametersServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7A353021E4D80E00887B77 /* ParametersServiceTestCase.swift */; };
 		AF7B51D221918EDF0001FCC5 /* SearchRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B51D121918EDF0001FCC5 /* SearchRecipe.swift */; };
 		AF8D183821A70983003B82B4 /* DisplayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D183721A70983003B82B4 /* DisplayAlert.swift */; };
 		AF8D183A21A70A2E003B82B4 /* UIViewControler + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D183921A70A2E003B82B4 /* UIViewControler + Extension.swift */; };
@@ -100,6 +105,11 @@
 		AF6DBBD6216B4C4800E9023F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF6DBBD8216B4C4800E9023F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF6F1E262181C32D00938222 /* RecipeServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTestCase.swift; sourceTree = "<group>"; };
+		AF7A352421E4B39200887B77 /* Cuisine.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Cuisine.json; sourceTree = "<group>"; };
+		AF7A352621E4B71300887B77 /* Diet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Diet.json; sourceTree = "<group>"; };
+		AF7A352821E4B7C300887B77 /* Allergy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Allergy.json; sourceTree = "<group>"; };
+		AF7A352B21E4D06600887B77 /* IngredientServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientServiceTestCase.swift; sourceTree = "<group>"; };
+		AF7A353021E4D80E00887B77 /* ParametersServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersServiceTestCase.swift; sourceTree = "<group>"; };
 		AF7B51D121918EDF0001FCC5 /* SearchRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipe.swift; sourceTree = "<group>"; };
 		AF8D183721A70983003B82B4 /* DisplayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlert.swift; sourceTree = "<group>"; };
 		AF8D183921A70A2E003B82B4 /* UIViewControler + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControler + Extension.swift"; sourceTree = "<group>"; };
@@ -304,6 +314,9 @@
 				AF6DBBC9216B4C4500E9023F /* AppDelegate.swift */,
 				AF6DBBD3216B4C4800E9023F /* Assets.xcassets */,
 				AF6DBBD8216B4C4800E9023F /* Info.plist */,
+				AF7A352421E4B39200887B77 /* Cuisine.json */,
+				AF7A352621E4B71300887B77 /* Diet.json */,
+				AF7A352821E4B7C300887B77 /* Allergy.json */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -319,6 +332,22 @@
 				AF29DF9B21D9603E0017971E /* Alert */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AF7A352A21E4D02C00887B77 /* IngredientTests */ = {
+			isa = PBXGroup;
+			children = (
+				AF7A352B21E4D06600887B77 /* IngredientServiceTestCase.swift */,
+			);
+			path = IngredientTests;
+			sourceTree = "<group>";
+		};
+		AF7A352D21E4D77A00887B77 /* ParametersTests */ = {
+			isa = PBXGroup;
+			children = (
+				AF7A353021E4D80E00887B77 /* ParametersServiceTestCase.swift */,
+			);
+			path = ParametersTests;
 			sourceTree = "<group>";
 		};
 		AF8D183B21A70A88003B82B4 /* Extension */ = {
@@ -344,7 +373,9 @@
 		AFB6E9952181B6B2005FD513 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				AF7A352A21E4D02C00887B77 /* IngredientTests */,
 				AFC4078D21D7ED560060AAFC /* RecipesTests */,
+				AF7A352D21E4D77A00887B77 /* ParametersTests */,
 				AFC4078E21D7EDAF0060AAFC /* CoreDataTests */,
 				AFB6E9982181B6B2005FD513 /* Info.plist */,
 			);
@@ -570,8 +601,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7A352721E4B71300887B77 /* Diet.json in Resources */,
+				AF7A352521E4B39200887B77 /* Cuisine.json in Resources */,
 				AF6DBBD7216B4C4800E9023F /* LaunchScreen.storyboard in Resources */,
 				AF6DBBD4216B4C4800E9023F /* Assets.xcassets in Resources */,
+				AF7A352921E4B7C300887B77 /* Allergy.json in Resources */,
 				AF6DBBCF216B4C4500E9023F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,8 +711,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7A352C21E4D06600887B77 /* IngredientServiceTestCase.swift in Sources */,
 				AF6F1E272181C32D00938222 /* RecipeServiceTestCase.swift in Sources */,
 				AFC4078A21D7845C0060AAFC /* RecipeFakeResponseData.swift in Sources */,
+				AF7A353121E4D80E00887B77 /* ParametersServiceTestCase.swift in Sources */,
 				AFC4078C21D79C190060AAFC /* CoreDataTests.swift in Sources */,
 				AF242D6A2197947800564FEF /* AlamofireRequestFake.swift in Sources */,
 				AFD1CC542194396E002526D5 /* FakeResponseData.swift in Sources */,

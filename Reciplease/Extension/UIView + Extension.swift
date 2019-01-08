@@ -32,6 +32,8 @@ extension UIView {
     // MARK: - display star rating
     func ratingDisplay(_ rating: String, _ collectionImage: [UIImageView]) {
         switch rating {
+        case "0":
+            collectionImageView(collectionImage, false, false, false, false, false)
         case "1":
             collectionImageView(collectionImage, true, false, false, false, false)
         case "2":
@@ -43,7 +45,7 @@ extension UIView {
         case "5":
             collectionImageView(collectionImage, true, true, true, true, true)
         default:
-            print("aucune image")
+            print("no image")
         }
     }
     func collectionImageView(_ collectionImage: [UIImageView],_ oneStar: Bool,_ twoStar: Bool,_ threeStar: Bool,_ fourStar: Bool,_ fiveStar: Bool) {

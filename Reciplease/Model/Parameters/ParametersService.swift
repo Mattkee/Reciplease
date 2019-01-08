@@ -10,20 +10,24 @@ import Foundation
 
 class ParametersService {
     // MARK: - Properties
-    var cookingChoice = [ListElement]()
-    var diets = [ListElement]()
-    var allergies = [ListElement]()
+    private var cookingChoice = [ListElement]()
+    private var diets = [ListElement]()
+    private var allergies = [ListElement]()
     var twoDimensionalArray = [Parameter]()
 
     // MARK: - Methods
     func updateParametersList() {
-        addListElement(Constant.cookingChoice) { listElement in
+        let cuisineObject = recoverBundleParameters("Cuisine")
+        let dietObject = recoverBundleParameters("Diet")
+        let allergyObject = recoverBundleParameters("Allergy")
+        
+        addListElement(cuisineObject) { listElement in
             self.cookingChoice = listElement
         }
-        addListElement(Constant.diets) { listElement in
+        addListElement(dietObject) { listElement in
             self.diets = listElement
         }
-        addListElement(Constant.alergies) { listElement in
+        addListElement(allergyObject) { listElement in
             self.allergies = listElement
         }
         twoDimensionalArray = [
@@ -32,11 +36,20 @@ class ParametersService {
             Parameter(isExpanded: false, title: "Allergies", list: allergies)
         ]
     }
-    
-    func addListElement(_ list: [String], callback: @escaping ([ListElement]) -> Void) {
+
+    private func recoverBundleParameters(_ nameBundle: String) -> [YummlyParameters] {
+        let bundle = Bundle(for: ParametersService.self)
+        let url = bundle.url(forResource: nameBundle, withExtension: "json")!
+        guard let object = try? JSONDecoder().decode([YummlyParameters].self, from: Data(contentsOf: url)) else {
+            return [YummlyParameters]()
+        }
+        return object
+    }
+
+    private func addListElement(_ list: [YummlyParameters], callback: @escaping ([ListElement]) -> Void) {
         var listElement = [ListElement]()
         list.forEach { element in
-            listElement.append(ListElement(name: element, isSelected: false))
+            listElement.append(ListElement(element: element, isSelected: false))
         }
         callback(listElement)
     }
