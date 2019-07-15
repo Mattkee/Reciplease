@@ -1,7 +1,8 @@
-#  Projet 10
-## Les Bonus de Reciplease
+#  Reciplease
 ### L'application Reciplease
 Reciplease est une application de recherches de recettes de cuisine avec des outils indispensables pour chercher par ingrédients et mettre ces recettes en favoris.
+
+**Attention pensez à rentrer votre Yummly ID et Yummly Key dans le fichier Constant pour utiliser l'API de Yummly.**
 
 **l'application se compose de plusieurs fonctionnalités principales :**
 * le choix des ingrédients pour trouver des recettes correspondantes

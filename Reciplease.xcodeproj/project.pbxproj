@@ -569,10 +569,11 @@
 				TargetAttributes = {
 					AF6DBBC5216B4C4500E9023F = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 					AFB6E9932181B6B2005FD513 = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = AF6DBBC5216B4C4500E9023F;
 					};
 				};
@@ -881,7 +882,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattkee.Reciplease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -899,7 +900,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattkee.Reciplease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -919,7 +920,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattkee.RecipleaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reciplease.app/Reciplease";
 			};
@@ -939,7 +940,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattkee.RecipleaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reciplease.app/Reciplease";
 			};
